@@ -1,0 +1,17 @@
+div.jumbotron {
+    background-image: url(../images/rain.jpg);
+    background-size: cover;
+    padding: 2em;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+body {
+    /*whatever text and other styling here*/
+}
+
+footer {
+    background-image: url(../images/rain.jpg);
+    background-size: cover;
+    padding: 2em;
+}
