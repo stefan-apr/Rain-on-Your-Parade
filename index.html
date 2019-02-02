@@ -21,7 +21,7 @@
 
         <div class="container text-center mb-5">
             <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                     <div class="card">
                         <div class="card-header"><h3 class="card-title">Search for events</h3></div>
                         <div class="card-body">
@@ -32,6 +32,13 @@
                                 <label for="event-location" class="form-label">Location</label><br>
                                 <input type="text" id="event-location" name="location" placeholder="City, State, or zip code">
                                 <!--google maps places API-->
+                                <br><br>
+                                <label for="event-location-radius" class="form-label">Search radius</label><br>
+                                <select id="event-location-radius">
+                                    <option id="5mi">5 miles</option>
+                                    <option id="10mi">10 miles</option>
+                                    <option id="50mi">50 miles</option>
+                                </select>
                                 <br><br>
                                 <label for="event-type" class="form-label">Type of event</label><br>
                                 <select id="event-type">
@@ -50,22 +57,46 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-8">
+                <div class="col-6">
                     <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
                     <p>Other interesting text here blahblahblah</p>
 
                     <!-- i was thinking this is where the google map will display results if we do decide to use google maps api.Yin -->
                     <iframe 
-                        width="600"
-                        height="450"
+                        width="400"
+                        height="400"
                         frameborder="0" style="border:0"
                         src="https://maps.google.co.uk/maps?q=moma+new+york&amp;output=embed"> 
                        
                     </iframe>
                 </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-header"><h3 class="card-title">Most popular searches</h3></div>
+                        <div class="card-body">
+                            <ol>
+                                <!-- Contents of this list dynamically generated from firebase -->
+                                <li>stuff</li>
+                                <li>stuff</li>
+                                <li>stuff</li>
+                                <li>stuff</li>
+                                <li>stuff</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
         <footer class="footer"></footer>
+
+        <!-- Load React -->
+        <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+        <!-- Load our React component. -->
+        <script src="like_button.js"></script>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
