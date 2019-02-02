@@ -10,6 +10,10 @@ body {
     /*whatever text and other styling here*/
 }
 
+iframe{
+    border:2px dotted green;
+}
+
 footer {
     background-image: url(../images/rain.jpg);
     background-size: cover;
