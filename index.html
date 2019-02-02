@@ -34,7 +34,7 @@
                                 <br><br>
                                 <label for="event-type" class="form-label">Type of event</label><br>
                                 <select id="event-type">
-                                    <option id="any-type">Any</option>
+                                    <option id="any-type" value="-1">Any</option>
                                     <!-- Populate other options from Eventbrite API using jQuery -->
                                 </select>
                                 <br><br>
@@ -44,8 +44,8 @@
                                 <input type="date" id="end-event" name="date" min="" max="">
                                 <!--Find a way to make the second date the same or later as the first date-->
                                 <br><br>
-                                <button class="btn btn-sm btn-dark" id="submit"><h4>Submit</h4></button>
                             </form>
+                            <button class="btn btn-sm btn-dark" id="submit"><h4>Submit</h4></button>
                         </div>
                     </div>
                 </div>
