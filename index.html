@@ -7,6 +7,7 @@
         <title>Raining on your parade</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="Assets/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="Assets/css/reset.css">
         <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     </head>
@@ -56,8 +57,10 @@
                     </div>
                 </div>
                 <div class="col-8">
+                    <div class="text">
                     <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
                     <p>Other interesting text here blahblahblah</p>
+                    </div>
 
                     <!-- i was thinking this is where the google map will display results if we do decide to use google maps api.Yin -->
                     <iframe 
@@ -70,11 +73,43 @@
                 </div>
             </div>
         </div>
+
+        <!------------- html for the fb results------------------->
+        
+        <div class='row'>
+            <div class='col-md-12'>
+                
+                <div class="card-header">
+                    <h2>Results</h2>
+                </div>
+            </div>
+            </div>
+        </div>
+    
+        <div class='row'>
+            <div class="col-lg-12">
+                <div class="card-body">
+                    <table class="table" id='results-table'>
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                            </tr>
+                        </thead>
+                         <tbody> results will be displayed here
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>    
         <footer class="footer"></footer>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
         <script src="Assets/javascript/placesAPI.js"></script>
+        <script src="Assets/javascript/firebase.js"></script>
+
         <script src="Assets/javascript/script.js"></script>
 
     </body>
