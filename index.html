@@ -29,8 +29,13 @@
                                 <input type="text" id="keyword" placeholder="">
                                 <br><br>
                                 <label for="event-location" class="form-label">Location</label><br>
+
+                                <!-- autocomplete the address with placesAPI -->
                                 <input type="text" id="event-location" name="location" placeholder="City, State, or zip code">
-                                <!--google maps places API-->
+
+                                    <!--google maps places API-->
+                                <br><br>
+                                <div id="showPredictions"></div>
                                 <br><br>
                                 <label for="event-type" class="form-label">Type of event</label><br>
                                 <select id="event-type">
@@ -122,6 +127,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+        <script src="Assets/javascript/placesAPI.js"></script>
         <script src="Assets/javascript/script.js"></script>
 
     </body>

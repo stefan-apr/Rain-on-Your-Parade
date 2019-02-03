@@ -7,3 +7,5 @@ var firebaseconfig = {
     storageBucket: "rainingonyourparade.appspot.com",
     messagingSenderId: "852639680516"
 };
+
+firebase.initializeApp(firebaseconfig);
