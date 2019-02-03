@@ -2,11 +2,12 @@
 
 <html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Raining on your parade</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="Assets/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     </head>
 
@@ -39,7 +40,7 @@
                                 <br><br>
                                 <label for="event-type" class="form-label">Type of event</label><br>
                                 <select id="event-type">
-                                    <option id="any-type">Any</option>
+                                    <option id="any-type" value="-1">Any</option>
                                     <!-- Populate other options from Eventbrite API using jQuery -->
                                 </select>
                                 <br><br>
@@ -49,8 +50,8 @@
                                 <input type="date" id="end-event" name="date" min="" max="">
                                 <!--Find a way to make the second date the same or later as the first date-->
                                 <br><br>
-                                <button class="btn btn-sm btn-dark" id="submit"><h4>Submit</h4></button>
                             </form>
+                            <button class="btn btn-sm btn-dark" id="submit"><h4>Submit</h4></button>
                         </div>
                     </div>
                 </div>
@@ -66,65 +67,11 @@
                         src="https://maps.google.co.uk/maps?q=moma+new+york&amp;output=embed"> 
                        
                     </iframe>
-=======
-
-    <head>
-        <title>Raining on your parade</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="Assets/css/reset.css">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-
-    <body>
-
-        <div class="jumbotron jumbotron-fluid text-center">
-            <div class="container">
-                <h2 class="display-2">Raining on your parade</h2>
-                <h3>(Or not, hopefully)</h3>
-            </div>
-        </div>
-
-        <div class="container text-center mb-5">
-            <div class="row">
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-header"><h3 class="card-title">Search for events</h3></div>
-                        <div class="card-body">
-                            <form id="form">
-                                <label for="keyword" class="form-label">Keyword</label><br>
-                                <input type="text" id="keyword" placeholder="">
-                                <br><br>
-                                <label for="event-location" class="form-label">Location</label><br>
-                                <input type="text" id="event-location" name="location" placeholder="City, State, or zip code">
-                                <!--google maps places API-->
-                                <br><br>
-                                <label for="event-type" class="form-label">Type of event</label><br>
-                                <select id="event-type">
-                                    <option id="any-type">Any</option>
-                                    <!-- Populate other options from Eventbrite API using jQuery -->
-                                </select>
-                                <br><br>
-                                <label for="start-event" class="form-label">Start date</label><br>
-                                <input type="date" id="start-event" name="date" min="" max=""><br>
-                                <label for="end-event" class="form-label">End date</label><br>
-                                <input type="date" id="end-event" name="date" min="" max="">
-                                <!--Find a way to make the second date the same or later as the first date-->
-                                <br><br>
-                                <button class="btn btn-sm btn-dark" id="submit">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-8" id="search-results">
-                    <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
-                    <p>Other interesting text here blahblahblah</p>
                 </div>
             </div>
         </div>
         <footer class="footer"></footer>
-
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
         <script src="Assets/javascript/placesAPI.js"></script>
