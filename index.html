@@ -57,18 +57,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-6" id="results">
                     <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
                     <p>Other interesting text here blahblahblah</p>
 
-                    <!-- i was thinking this is where the google map will display results if we do decide to use google maps api.Yin -->
+                    <!-- Catherine commented out the iframe because we might not end up using it after all -->
+                    <!-- i was thinking this is where the google map will display results if we do decide to use google maps api.Yin
                     <iframe 
                         width="400"
                         height="400"
                         frameborder="0" style="border:0"
                         src="https://maps.google.co.uk/maps?q=moma+new+york&amp;output=embed"> 
                        
-                    </iframe>
+                    </iframe>-->
                 </div>
                 <div class="col-3">
                     <div class="card">
@@ -90,15 +91,10 @@
         </div>
         <footer class="footer"></footer>
 
-        <!-- Load React -->
-        <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-
-        <!-- Load our React component. -->
-        <script src="like_button.js"></script>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
+        <!-- ^ Catherine needs moment for choosing historical vs forecast data-->
         <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
         <script src="Assets/javascript/script.js"></script>
 
