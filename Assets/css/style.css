@@ -3,15 +3,15 @@ div.jumbotron {
     background-size: cover;
     padding: 2em;
     color: white;
-    text-shadow: 2px 2px 4px #000000;
+    text-shadow: 2px 2px 4px black;
 }
 
-body {
-    /*whatever text and other styling here*/
+div.collapse {
+    display: none;
 }
 
-iframe{
-    border:2px dotted green;
+div.collapse-show {
+    display: block;
 }
 
 footer {

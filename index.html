@@ -30,19 +30,14 @@
                                 <input type="text" id="keyword" placeholder="">
                                 <br><br>
                                 <label for="event-location" class="form-label">Location</label><br>
+                                <!-- autocomplete the address with placesAPI -->
                                 <input type="text" id="event-location" name="location" placeholder="City, State, or zip code">
                                 <!--google maps places API-->
                                 <br><br>
-                                <label for="event-location-radius" class="form-label">Search radius</label><br>
-                                <select id="event-location-radius">
-                                    <option id="5mi">5 miles</option>
-                                    <option id="10mi">10 miles</option>
-                                    <option id="50mi">50 miles</option>
-                                </select>
-                                <br><br>
+                                <div id="showPredictions"></div> <!--Is it possible to make this a dropdown? Like the one for search radius-->
                                 <label for="event-type" class="form-label">Type of event</label><br>
                                 <select id="event-type">
-                                    <option id="any-type">Any</option>
+                                    <option id="any-type" value="-1">Any</option>
                                     <!-- Populate other options from Eventbrite API using jQuery -->
                                 </select>
                                 <br><br>
@@ -52,24 +47,15 @@
                                 <input type="date" id="end-event" name="date" min="" max="">
                                 <!--Find a way to make the second date the same or later as the first date-->
                                 <br><br>
-                                <button class="btn btn-sm btn-dark" id="submit"><h4>Submit</h4></button>
                             </form>
+                            <button class="btn btn-sm btn-dark" id="submit">Submit</button>
                         </div>
                     </div>
                 </div>
-                <div class="col-6" id="results">
+                <div class="col-6">
                     <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
                     <p>Other interesting text here blahblahblah</p>
 
-                    <!-- Catherine commented out the iframe because we might not end up using it after all -->
-                    <!-- i was thinking this is where the google map will display results if we do decide to use google maps api.Yin
-                    <iframe 
-                        width="400"
-                        height="400"
-                        frameborder="0" style="border:0"
-                        src="https://maps.google.co.uk/maps?q=moma+new+york&amp;output=embed"> 
-                       
-                    </iframe>-->
                 </div>
                 <div class="col-3">
                     <div class="card">
@@ -90,13 +76,15 @@
             </div>
         </div>
         <footer class="footer"></footer>
-
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
-        <!-- ^ Catherine needs moment for choosing historical vs forecast data-->
         <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
-        <script src="Assets/javascript/script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
+        <script src="Assets/javascript/placesAPI.js"></script>
+        <script src="Assets/javascript/eventbriteAPI.js"></script>
+        <script src="Assets/javascript/weatherAPI.js"></script>
+        <!--<script src="Assets/javascript/script.js"></script>-->
+        <!--saving this line here in case we need additional functionality that is not specific to any of the other files-->
 
     </body>
 </html>
