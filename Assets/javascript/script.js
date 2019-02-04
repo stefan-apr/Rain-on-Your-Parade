@@ -134,10 +134,8 @@ $(document).ready(function() {
       url: URL,
       method: "GET"
     }).then(function(response) {
-      console.log("Events: !");
+      console.log("Events: !!");
       console.log(response);
-
-   
 
     });
   }
