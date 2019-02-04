@@ -1,4 +1,7 @@
 $(document).ready(function() {
+
+  $('.card-display').hide();
+
   // OAuth Token. (This should probably be encrypted but it's OK for now)
   var auth = "FGSMQANMR2CUSP7RFDDL";
 
@@ -49,6 +52,8 @@ $(document).ready(function() {
     // to hide the html elements on the landing page on click to show the results.Yin
     $('.card').hide();
     $('.text').hide();
+    $('#one').hide();
+    $('.card-display').show();
 
     var selectedCat = $("#event-type").val();
     var selectedStartDate = $("#start-event").val();
@@ -129,14 +134,10 @@ $(document).ready(function() {
       url: URL,
       method: "GET"
     }).then(function(response) {
-      console.log("Events: !!");
+      console.log("Events: !");
       console.log(response);
 
-    //needing to get name of the events.Yin
-    var results = response.events.name;
-      for ( var i = 0; i < results.length;i++){
-        console.log(results[i])
-      };
+   
 
     });
   }
@@ -146,25 +147,6 @@ $(document).ready(function() {
   // ---------------------------------------------------FIREBASE------------------------------------------------
  
   var database = firebase.database();
-
-  // // creating a temp obj to hold values 
-  // var newObj = {
-  //   category: selectedCat,
-  //   startDate: selectedStartDate,
-  //   endDate: selectedEndDate,
-  //   radius: 10
-  // };
-
-  // push values from the temp newobj to fb
-  // database.ref().push(newObj);
-  // console.log(newObj);
-  // console.log(newObj.startDate);
-  // console.log(newObj.endDate);
-
-  // // clearing the input boxes.
-  // $("#event-type").val("");
-  // $("#start-event").val("");
-  // $("#end-event").val("");
 
   // CREATING A FIREBASE EVENT.
   database.ref().on("child_added", function(snapshot) {
@@ -179,10 +161,11 @@ $(document).ready(function() {
     console.log(selectedStartDate);
     console.log(selectedEndDate + 'end');
     // appending to dom
-    var newRow = $('<tr>')
-    newRow.text(selectedCat);
-    newRow.text(selectedStartDate);
-    newRow.text(selectedEndDate);
+    var newRow = $('<tr>').append(
+    $('<td>').text(selectedCat),
+    $('<td>').text(selectedStartDate),
+    $('<td>').text(selectedEndDate)
+    );
 
     $('#results-table > tbody').append(newRow);
   });

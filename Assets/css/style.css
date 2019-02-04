@@ -10,8 +10,10 @@ body {
     /*whatever text and other styling here*/
 }
 
-iframe{
+.iframe{
     border:2px dotted green;
+    float:left;
+    position: relative;
 }
 
 footer {
