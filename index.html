@@ -7,6 +7,7 @@
         <title>Raining on your parade</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="Assets/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="Assets/css/reset.css">
         <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     </head>
@@ -62,9 +63,17 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-6">
+
+
+                
+                    <div class="text">
+
                     <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
                     <p>Other interesting text here blahblahblah</p>
+                    </div>
+
 
                 </div>
                 <div class="col-3">
@@ -82,9 +91,45 @@
                         </div>
                     </div>
 
+
+                    <!-- i was thinking this is where the google map will display results if we do decide to use google maps api.Yin -->
+                    <iframe id='one'
+                        width="600"
+                        height="450"
+                        frameborder="0" style="border:0"
+                        src="https://maps.google.co.uk/maps?q=moma+new+york&amp;output=embed"> 
+                       
+                    </iframe>
+
                 </div>
             </div>
+            </div>
         </div>
+
+        <!------------- html for the fb results------------------->
+
+        <div class='row'>
+            <div class="card-display">
+                    <div class="card-deck">
+                        
+                        <div class="card-body col-mb-6">
+                            <h3 class="card-title">Search Results</h3>
+                                <table class="table" id='results-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Event</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
         <footer class="footer"></footer>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -98,6 +143,10 @@
         <!--saving this line here in case we need additional functionality that is not specific to any of the other files-->
 
  
+        <script src="Assets/javascript/firebase.js"></script>  <!--added -->
+
+        
+
 
     </body>
 </html>

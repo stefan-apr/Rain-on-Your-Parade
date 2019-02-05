@@ -10,8 +10,14 @@ div.collapse {
     display: none;
 }
 
+
 div.collapse-show {
     display: block;
+.iframe{
+    border:2px dotted green;
+    float:left;
+    position: relative;
+
 }
 
 footer {
