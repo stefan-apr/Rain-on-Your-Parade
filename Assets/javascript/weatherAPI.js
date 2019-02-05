@@ -8,6 +8,7 @@ $(".result-shell").on("click", function(event) {
         var lat = $(this).attr("data-latitude"); // pulled from eventbrite API
         var long = $(this).attr("data-longitude");// pulled from eventbrite API
         var eventDate = moment($(this).attr("data-start"));
+
         var today = moment();
         var URL = "https://api.darksky.net/forecast/e3bf810172b3fa7c6960cc8b6769743c/";
         var queryURL;
@@ -51,5 +52,6 @@ $(".result-shell").on("click", function(event) {
         $("this").attr("class", "collapse");
     }
     */
+
     }
 })
