@@ -1,13 +1,14 @@
 // default is collapsed
 
-$(/*SEARCH RESULTS CLICKS*/).on("click", function(event) {
+$(".result-shell").on("click", function(event) {
     event.preventDefault();
     
-    if ($("this").next("div").hasClass("collapse")) {
+    // if ($("this").next("div").hasClass("collapse")) {
     
-        var lat = ; // pulled from eventbrite API
-        var long = ;// pulled from eventbrite API
-        var eventDate = moment(/* pulled from eventbrite api*/);
+        var lat = $(this).attr("data-latitude"); // pulled from eventbrite API
+        var long = $(this).attr("data-longitude");// pulled from eventbrite API
+        var eventDate = moment($(this).attr("data-start"));
+
         var today = moment();
         var URL = "https://api.darksky.net/forecast/e3bf810172b3fa7c6960cc8b6769743c/";
         var queryURL;
@@ -45,9 +46,12 @@ $(/*SEARCH RESULTS CLICKS*/).on("click", function(event) {
                 $("this").attr("class", "collapse-show");
             })
 
+    /*
     else {
         // collapse div
         $("this").attr("class", "collapse");
     }
+    */
+
     }
 })
