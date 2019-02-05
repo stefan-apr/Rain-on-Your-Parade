@@ -30,9 +30,16 @@
                                 <input type="text" id="keyword" placeholder="">
                                 <br><br>
                                 <label for="event-location" class="form-label">Location</label><br>
+
+
+
+
                                 <!-- autocomplete the address with placesAPI -->
                                 <input type="text" id="event-location" name="location" placeholder="City, State, or zip code">
-                                <!--google maps places API-->
+
+                                    <!--google maps places API-->
+                                <br><br>
+                                <div id="showPredictions"></div>
                                 <br><br>
                                 <div id="showPredictions"></div> <!--Is it possible to make this a dropdown? Like the one for search radius-->
                                 <label for="event-type" class="form-label">Type of event</label><br>
@@ -48,7 +55,10 @@
                                 <!--Find a way to make the second date the same or later as the first date-->
                                 <br><br>
                             </form>
+
                             <button class="btn btn-sm btn-dark" id="submit">Submit</button>
+
+                           
                         </div>
                     </div>
                 </div>
@@ -79,12 +89,15 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
         <script src="Assets/javascript/placesAPI.js"></script>
         <script src="Assets/javascript/eventbriteAPI.js"></script>
         <script src="Assets/javascript/weatherAPI.js"></script>
         <!--<script src="Assets/javascript/script.js"></script>-->
         <!--saving this line here in case we need additional functionality that is not specific to any of the other files-->
+
+ 
 
     </body>
 </html>
