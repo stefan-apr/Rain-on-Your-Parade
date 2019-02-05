@@ -22,7 +22,7 @@
 
         <div class="container text-center mb-5">
             <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                     <div class="card">
                         <div class="card-header"><h3 class="card-title">Search for events</h3></div>
                         <div class="card-body">
@@ -32,6 +32,9 @@
                                 <br><br>
                                 <label for="event-location" class="form-label">Location</label><br>
 
+
+
+
                                 <!-- autocomplete the address with placesAPI -->
                                 <input type="text" id="event-location" name="location" placeholder="City, State, or zip code">
 
@@ -39,6 +42,7 @@
                                 <br><br>
                                 <div id="showPredictions"></div>
                                 <br><br>
+                                <div id="showPredictions"></div> <!--Is it possible to make this a dropdown? Like the one for search radius-->
                                 <label for="event-type" class="form-label">Type of event</label><br>
                                 <select id="event-type">
                                     <option id="any-type" value="-1">Any</option>
@@ -52,16 +56,41 @@
                                 <!--Find a way to make the second date the same or later as the first date-->
                                 <br><br>
                             </form>
-                            <button class="btn btn-sm btn-dark" id="submit"><h4>Submit</h4></button>
+
+                            <button class="btn btn-sm btn-dark" id="submit">Submit</button>
+
+                           
                         </div>
                     </div>
                 </div>
 
-                <div class="col-8">
+                <div class="col-6">
+
+
+                
                     <div class="text">
+
                     <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
                     <p>Other interesting text here blahblahblah</p>
                     </div>
+
+
+                </div>
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-header"><h3 class="card-title">Most popular searches</h3></div>
+                        <div class="card-body">
+                            <ol>
+                                <!-- Contents of this list dynamically generated from firebase -->
+                                <li>stuff</li>
+                                <li>stuff</li>
+                                <li>stuff</li>
+                                <li>stuff</li>
+                                <li>stuff</li>
+                            </ol>
+                        </div>
+                    </div>
+
 
                     <!-- i was thinking this is where the google map will display results if we do decide to use google maps api.Yin -->
                     <iframe id='one'
@@ -71,6 +100,7 @@
                         src="https://maps.google.co.uk/maps?q=moma+new+york&amp;output=embed"> 
                        
                     </iframe>
+
                 </div>
             </div>
             </div>
@@ -104,10 +134,19 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
         <script src="Assets/javascript/placesAPI.js"></script>
+        <script src="Assets/javascript/eventbriteAPI.js"></script>
+        <script src="Assets/javascript/weatherAPI.js"></script>
+        <!--<script src="Assets/javascript/script.js"></script>-->
+        <!--saving this line here in case we need additional functionality that is not specific to any of the other files-->
+
+ 
         <script src="Assets/javascript/firebase.js"></script>  <!--added -->
 
-        <script src="Assets/javascript/script.js"></script>
+        
+
 
     </body>
 </html>
