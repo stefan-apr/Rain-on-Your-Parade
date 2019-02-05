@@ -189,10 +189,6 @@ $(document).ready(function() {
     this.endDate = endDate;
     this.description = description;
   }
-    });
-  }
-
-
 
   // ---------------------------------------------------FIREBASE------------------------------------------------
  
