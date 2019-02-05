@@ -9,6 +9,12 @@ $(document).ready(function() {
   var catURL = "https://www.eventbriteapi.com/v3/categories/?token=" + auth;
   // URL to get a list of all subcategories Eventbrite has. (For debug purposes. Not currently in use.)
   var subcatURL = "https://www.eventbriteapi.com/v3/subcategories/?token=" + auth;
+  // The URL to be queried. Modified as necessary.
+  var queryURL = "";
+  // Contains all hits from the event search function.
+  var results = [];
+  // Used in generating results page buttons
+  var initialQuery = true;
 
   // Get list of Eventbrite categories and append them to #event-type dropdown
   $.ajax({
@@ -35,27 +41,44 @@ $(document).ready(function() {
   */
 
   $("#submit").click(function() {
-    var selectedCat = $('#event-type').val();
+    initialQuery = true;
+    results = [];
+    $("#results-buttons-up").empty();
+    $("#results-buttons-down").empty();
     var selectedStartDate = $("#start-event").val();
     var selectedEndDate = $("#end-event").val();
-    var radius = 10;
+    if(selectedStartDate <= selectedEndDate) {
+      var selectedCat = $('#event-type').val();
+      var radius = 10;
 
-    // Use the radius decleration below once this script is attached to HTML that includes the radius dropdown:
+      // Use the radius decleration below once this script is attached to HTML that includes the radius dropdown:
 
-    //var radius = $("#event-location-radius").val();
+      //var radius = $("#event-location-radius").val();
 
-    var latitude = "47.620422";
-    var longitude = "-122.349358";
-    // User picked "Any" category; category field is omitted.
-    if(parseInt(selectedCat) === -1) {
-      getEvents("https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
-        latitude + "&location.within=" + radius + "mi&start_date.range_start=" + selectedStartDate + 
-        "T00:00:01Z" + "&start_date.range_end=" + selectedEndDate + "T00:00:01Z" + "&token=" + auth);
-    } // User picked a category; category field is included.
+      var latitude = "47.620422";
+      var longitude = "-122.349358";
+      var categoryPiece = "";
+      var startDatePiece = "";
+      var endDatePiece = "";
+      if(parseInt(selectedCat) !== -1) {
+        categoryPiece = "&categories=" + selectedCat;
+      }
+      if(selectedStartDate !== "") {
+        startDatePiece = "&start_date.range_start=" + selectedStartDate + "T00:00:01Z";
+      }
+      if(selectedEndDate !== "") {
+        endDatePiece = "&start_date.range_end=" + selectedEndDate + "T00:00:01Z";
+      }
+
+      queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
+        latitude + "&location.within=" + radius + "mi" + categoryPiece + startDatePiece + endDatePiece + "&expand=venue,ticket_availability,format" 
+        + "&token=" + auth;
+      getEvents(queryURL);
+    } 
+    // The user entered a start date that's later than the end. Display an error message. 
     else {
-      getEvents("https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
-        latitude + "&location.within=" + radius + "mi&categories=" + selectedCat + "&start_date.range_start=" + selectedStartDate + 
-        "T00:00:01Z" + "&start_date.range_end=" + selectedEndDate + "T00:00:01Z" + "&token=" + auth);
+      console.log("Invalid date entry");
+      alert("Start date later than end date error. Take this alert out later.");
     }
   });
 
@@ -68,6 +91,58 @@ $(document).ready(function() {
     .then(function(response) {
       console.log("Events: ");
       console.log(response);
+
+      $("#results-page").empty();
+      if(initialQuery) {
+        initialQuery = false;
+
+        // Make results buttons if this is the first search with these terms.
+        for(var i = 0; i < response.pagination.page_count; i++) {
+          var newButtonUp = $("<button value='" + i + "' class='btn btn-dark' id='btn-up-" + i +"'>" + i + "</button>");
+          var newButtonDown = $("<button value='" + i + "' class='btn btn-dark' id='btn-down-" + i + "'>" + i + "</button>");         
+          $("#results-buttons-up").append(newButtonUp);
+          $("#results-buttons-down").append(newButtonDown);
+          $("#btn-up-" + i).click(function() {
+            getEvents(queryURL +  "&page=" + $(this).attr("value"));
+          });
+          $("#btn-down-" + i).click(function() {
+            getEvents(queryURL +  "&page=" + $(this).attr("value"));
+          });
+        }
+      }
+      results = [];
+      for(var i = 0; i < response.events.length; i++) {
+        var newEvent = new event(response.events[i].id, response.events[i].name.text, response.events[i].venue.address.city, 
+          response.events[i].start.local, response.events[i].end.local, response.events[i].description.text);
+        results.push(newEvent);
+        var newShell = $("<div id='" + i + "-outer' class='result-shell'>" + results[i].name + "</div>");
+        var newInside = $("<div id='" + i + "-inner' class='result-interior'>" + "This is an inner result" + "</div>");
+        var linebreak = $("<br>");
+        newInside.css("display", "none");
+        $("#results-page").append(newShell);
+        newShell.append(newInside);
+        $("#results-page").append(linebreak);
+      }
+      console.log("Results array:");
+      console.log(results);
+
+      // Recursive query for displaying all items on one page together.
+      /*
+      if(response.pagination.has_more_items) {
+        var nextPage = response.pagination.page_number + 1
+        getEvents(queryURL +  "&page=" + nextPage);
+      }
+      */
     });
+  }
+
+  // Event object containing the important data for each event. Can be modified as needed.
+  function event(id, name, city, startDate, endDate, description) {
+    this.id = id;
+    this.name = name;
+    this.city = city;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.description = description;
   }
 });

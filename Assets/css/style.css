@@ -19,3 +19,8 @@ footer {
     background-size: cover;
     padding: 2em;
 }
+
+.result-shell {
+    border: 2px solid black;
+    border-radius: 3px;
+}
