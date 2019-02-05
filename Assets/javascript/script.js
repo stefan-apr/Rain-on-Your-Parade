@@ -115,7 +115,9 @@ $(document).ready(function() {
         var newEvent = new event(response.events[i].id, response.events[i].name.text, response.events[i].venue.address.city, 
           response.events[i].start.local, response.events[i].end.local, response.events[i].description.text);
         results.push(newEvent);
-        var newShell = $("<div id='" + i + "-outer' class='result-shell'>" + results[i].name + "</div>");
+        var newShell = $("<div id='" + i + "-outer' class='result-shell' data-name='" + response.events[i].name.text + 
+        "' data-longitude='" + response.events[i].venue.longitude + "' data-latitude='" + response.events[i].venue.latitude + 
+        "' data-start='" + response.events[i].start.local + "'>" + results[i].name + "</div>");
         var newInside = $("<div id='" + i + "-inner' class='result-interior'>" + "This is an inner result" + "</div>");
         var linebreak = $("<br>");
         newInside.css("display", "none");
