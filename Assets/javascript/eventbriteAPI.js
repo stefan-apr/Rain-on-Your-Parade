@@ -113,7 +113,7 @@ $(document).ready(function() {
         endDatePiece = "&start_date.range_end=" + selectedEndDate + "T00:00:01Z";
       }
 
-      queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
+      queryURL = "https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
         latitude + "&location.within=" + radius + "mi" + categoryPiece + startDatePiece + endDatePiece + "&expand=venue,ticket_availability,format" 
         + "&token=" + auth;
       getEvents(queryURL);
@@ -158,8 +158,8 @@ $(document).ready(function() {
           response.events[i].start.local, response.events[i].end.local, response.events[i].description.text);
         results.push(newEvent);
         var newShell = $("<div id='" + i + "-outer' class='result-shell' data-name='" + response.events[i].name.text + 
-        "' data-longitude='" + response.events[i].venue.longitude + "' data-latitude='" + response.events[i].venue.latitude + 
-        "' data-start='" + response.events[i].start.local + "'>" + results[i].name + "</div>");
+          "' data-longitude='" + response.events[i].venue.longitude + "' data-latitude='" + response.events[i].venue.latitude + 
+          "' data-start='" + response.events[i].start.local + "'>" + results[i].name + "</div>");
         var newInside = $("<div id='" + i + "-inner' class='result-interior'>" + "This is an inner result" + "</div>");
         var linebreak = $("<br>");
         newInside.css("display", "none");
