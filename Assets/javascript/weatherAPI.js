@@ -1,6 +1,6 @@
 // default is collapsed
 
-$(".result-shell").on("click", function(event) {
+$(document).on("click", ".result-shell", function(event) {
     event.preventDefault();
     
     // if ($("this").next("div").hasClass("collapse")) {
@@ -14,7 +14,7 @@ $(".result-shell").on("click", function(event) {
         var queryURL;
         var wxresults; 
         var wxdisplay = $("div");
-        var eventDate;
+        var eventDate;  
     
         if (eventDate.diff(today, "days") <= 7) {
             queryURL = URL + lat + "," + long;
@@ -31,7 +31,7 @@ $(".result-shell").on("click", function(event) {
                 wxresults = response.data;
                 console.log(queryURL);
                 console.log(wxresults);
-                for (var i = 0; i < 8; i++) {
+                for (var i=0; i<8; 1++) {
                     //var icon = wxresults.daily.data[i].icon; //
                     var summary = wxresults.daily.data[i].summary;
                     var rain = wxresults.daily.data[i].precipProbability;
@@ -52,4 +52,6 @@ $(".result-shell").on("click", function(event) {
         $("this").attr("class", "collapse");
     }
     */
+
+    }
 })
