@@ -7,8 +7,13 @@
         <title>Raining on your parade</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="Assets/css/reset.css">
-        <link rel="stylesheet" type="text/css" href="Assets/css/reset.css">
+        <!-- <link rel="stylesheet" type="text/css" href="Assets/css/reset.css"> dup?-->
         <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
+        
+        <!-- GOOGLE MAPS -->
+        <link rel="stylesheet" type="text/css" href="Assets/css/googleMaps.css">
+
+
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     </head>
 
@@ -31,11 +36,8 @@
                                 <input type="text" id="keyword" placeholder="">
                                 <br><br>
                                 <label for="event-location" class="form-label">Location</label><br>
-
-
-
-
-                                <!-- autocomplete the address with placesAPI -->
+<!-- 
+                                autocomplete the address with placesAPI  -->
                                 <input type="text" id="event-location" name="location" placeholder="City, State, or zip code">
 
                                     <!--google maps places API-->
@@ -54,22 +56,19 @@
                                 <label for="end-event" class="form-label">End date</label><br>
                                 <input type="date" id="end-event" name="date" min="" max="">
                                 <!--Find a way to make the second date the same or later as the first date-->
-                                <br><br>
+                                 <br><br>
                             </form>
 
-                            <button class="btn btn-sm btn-dark" id="submit">Submit</button>
+                            <button class="btn btn-sm btn-dark" id="submit">Submit</button>   
 
-                           
+                    
                         </div>
                     </div>
                 </div>
-
+            
+          
                 <div class="col-6">
-
-
-                
                     <div class="text">
-
                     <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
                     <p>Other interesting text here blahblahblah</p>
                     </div>
@@ -78,59 +77,58 @@
                     <div id="results-page"></div>
                     <div id="results-buttons-down"></div>
                 </div>
-                <div class="col-3">
+            
+                <!-- <div class="col-3">
                     <div class="card">
                         <div class="card-header"><h3 class="card-title">Most popular searches</h3></div>
                         <div class="card-body">
-                            <ol>
-                                <!-- Contents of this list dynamically generated from firebase -->
+                             <ol>
+                                Contents of this list dynamically generated from firebase
                                 <li>stuff</li>
                                 <li>stuff</li>
                                 <li>stuff</li>
                                 <li>stuff</li>
                                 <li>stuff</li>
-                            </ol>
+                            </ol> 
                         </div>
-                    </div>
+                    </div>  -->
+                <!-- </div> -->
+
+
+               
 
 
                     <!-- i was thinking this is where the google map will display results if we do decide to use google maps api.Yin -->
-                    <iframe id='one'
-                        width="600"
-                        height="450"
-                        frameborder="0" style="border:0"
-                        src="https://maps.google.co.uk/maps?q=moma+new+york&amp;output=embed"> 
-                       
-                    </iframe>
-                </div>
-            </div>
-            </div>
+                
+         <!--Google map-->
+         <input type="text" class="form-control" id="pac-input" aria-describedby="search" placeholder="Search Box">
+         <div id="map">
+                google
         </div>
+ 
+   <!-- <div class="col-md-6 mb-4"></div>
 
-        <!------------- html for the fb results------------------->
-
-        <div class='row'>
-            <div class="card-display">
-                    <div class="card-deck">
-                        
-                        <div class="card-body col-mb-6">
-                            <h3 class="card-title">Search Results</h3>
-                                <table class="table" id='results-table'>
-                                <thead>
-                                    <tr>
-                                        <th>Event</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody> 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+        <div class="card card-cascade narrower">
+          <div class="view view-cascade gradient-card-header peach-gradient">
+            <h5 class="mb-0">Custom map</h5>
+          </div>
+         
+          <div class="card-body card-body-cascade text-center">
+    
+           Google map
+            <div id="map-container-google-9" class="z-depth-1-half map-container-5" style="height: 300px">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d820598.541196199!2d-122.43399643314817!3d47.50123480206164!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5485e5ffe7c3b0f9%3A0x944278686c5ff3ba!2sWashington!5e0!3m2!1sen!2sus!4v1549396490381" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> 
             </div>
-       
+    
+          </div>
+    
+        </div>
+      </div>
+       -->
+    </div>
+ 
+      <!--Google Maps-->
+
         <footer class="footer"></footer>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -140,15 +138,29 @@
         <script src="Assets/javascript/placesAPI.js"></script>
         <script src="Assets/javascript/eventbriteAPI.js"></script>
         <script src="Assets/javascript/weatherAPI.js"></script>
-        <!--<script src="Assets/javascript/script.js"></script>-->
+        <script src="Assets/javascript/googleMaps.js"></script>
+
         <!--saving this line here in case we need additional functionality that is not specific to any of the other files-->
 
  
         <script src="Assets/javascript/firebase.js"></script>  <!--added -->
 
+
+        <!-------------------- TESTING GOOGLE MAPS------------------ -->
+
+        </script>
+        <!--JQ -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- BOOTSRAPS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- GOOGLE MAPS -->
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTlO4pKr4aLLI2sA2Z8MwU7C5pRcu9ExY&libraries=places&callback=initAutocomplete"async defer>
+        </script>
+        
+  </body>
+</html>
         
 
 
-    </body>
-</html>
 
