@@ -73,4 +73,12 @@
           });
           map.fitBounds(bounds);
         });
-      }
+      }  /*end of initMap*/
+
+    //   $('#submit').on('click',function(){
+    //       var mapSearch = $('#event-location').val();
+    //       mapSearch = searchBox;
+
+    //       $('#map').append(mapSearch);
+
+    //   })
