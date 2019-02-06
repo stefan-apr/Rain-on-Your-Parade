@@ -8,7 +8,6 @@ $(document).on("click", ".result-shell", function(event) {
         var lat = $(this).attr("data-latitude"); // pulled from eventbrite API
         var long = $(this).attr("data-longitude");// pulled from eventbrite API
         var eventDate = moment($(this).attr("data-start"));
-        console.log(eventDate);
 
         var today = moment();
         var URL = "https://api.darksky.net/forecast/e3bf810172b3fa7c6960cc8b6769743c/";
@@ -21,6 +20,7 @@ $(document).on("click", ".result-shell", function(event) {
             queryURL = URL + lat + "," + long;
         }
         else { /* Event date > 7 days away*/
+            // I commented this line out because the "time" variable isn't declared and I don't know what it's supposed to be. -Stefan
             // queryURL = URL + lat + "," + long + "," + time;
         }
     

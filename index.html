@@ -32,15 +32,21 @@
                                 <br><br>
                                 <label for="event-location" class="form-label">Location</label><br>
 
-
-
-
                                 <!-- autocomplete the address with placesAPI -->
                                 <input type="text" id="event-location" name="location" placeholder="City, State, or zip code">
 
                                     <!--google maps places API-->
                                 <br><br>
                                 <div id="showPredictions"></div>
+                                <label for="radius" class="form-label">Search Radius</label><br>      
+                                <select id="event-location-radius">
+                                    <option id="1-mi" value="1">1 Mile</option>
+                                    <option id="5-mi" value="5">5 Miles</option>
+                                    <option id="10-mi" value="10">10 Miles</option>
+                                    <option id="20-mi" value="20">20 Miles</option>
+                                    <option id="50-mi" value="50">50 Miles</option>
+                                    <option id="100-mi" value="100">100 Miles</option>
+                                </select>                         
                                 <br><br>
                                 <div id="showPredictions"></div> <!--Is it possible to make this a dropdown? Like the one for search radius-->
                                 <label for="event-type" class="form-label">Type of event</label><br>
@@ -64,7 +70,7 @@
                     </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-6" id="centerpiece">
 
 
                 
@@ -73,12 +79,8 @@
                     <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
                     <p>Other interesting text here blahblahblah</p>
                     </div>
-
-                    <div id="results-buttons-up"></div>
-                    <div id="results-page"></div>
-                    <div id="results-buttons-down"></div>
                 </div>
-                <div class="col-3">
+                <div class="col-3" id="pop-searches">
                     <div class="card">
                         <div class="card-header"><h3 class="card-title">Most popular searches</h3></div>
                         <div class="card-body">
@@ -103,34 +105,14 @@
                        
                     </iframe>
                 </div>
+                <div class="col-9" id="results-frame">
+                    <div id="results-buttons-up"></div>
+                    <div id="results-page"></div>
+                    <div id="results-buttons-down"></div>
+                </div>
             </div>
             </div>
         </div>
-
-        <!------------- html for the fb results------------------->
-
-        <div class='row'>
-            <div class="card-display">
-                    <div class="card-deck">
-                        
-                        <div class="card-body col-mb-6">
-                            <h3 class="card-title">Search Results</h3>
-                                <table class="table" id='results-table'>
-                                <thead>
-                                    <tr>
-                                        <th>Event</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody> 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-       
         <footer class="footer"></footer>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
