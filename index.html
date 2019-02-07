@@ -36,13 +36,23 @@
                                 <input type="text" id="keyword" placeholder="">
                                 <br><br>
                                 <label for="event-location" class="form-label">Location</label><br>
-<!-- 
-                                autocomplete the address with placesAPI  -->
+
+                                <!-- autocomplete the address with placesAPI -->
+
                                 <input type="text" id="event-location" name="location" placeholder="City, State, or zip code">
 
                                     <!--google maps places API-->
                                 <br><br>
                                 <div id="showPredictions"></div>
+                                <label for="radius" class="form-label">Search Radius</label><br>      
+                                <select id="event-location-radius">
+                                    <option id="1-mi" value="1">1 Mile</option>
+                                    <option id="5-mi" value="5">5 Miles</option>
+                                    <option id="10-mi" value="10">10 Miles</option>
+                                    <option id="20-mi" value="20">20 Miles</option>
+                                    <option id="50-mi" value="50">50 Miles</option>
+                                    <option id="100-mi" value="100">100 Miles</option>
+                                </select>                         
                                 <br><br>
                                 <div id="showPredictions"></div> <!--Is it possible to make this a dropdown? Like the one for search radius-->
                                 <label for="event-type" class="form-label">Type of event</label><br>
@@ -65,20 +75,17 @@
                         </div>
                     </div>
                 </div>
-            
-          
-                <div class="col-6">
+
+                <div class="col-6" id="centerpiece">                
+
                     <div class="text">
                     <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
                     <p>Other interesting text here blahblahblah</p>
                     </div>
-
-                    <div id="results-buttons-up"></div>
-                    <div id="results-page"></div>
-                    <div id="results-buttons-down"></div>
                 </div>
-            
-                <!-- <div class="col-3">
+
+                <div class="col-3" id="pop-searches">
+
                     <div class="card">
                         <div class="card-header"><h3 class="card-title">Most popular searches</h3></div>
                         <div class="card-body">
@@ -93,6 +100,7 @@
                         </div>
                     </div>  -->
                 <!-- </div> -->
+
 
          <!--GOOGLE MAPS. YIN-->
          <input type="text" class="form-control" id="pac-input" aria-describedby="search" placeholder="Search Box">
@@ -113,16 +121,35 @@
            Google map
             <div id="map-container-google-9" class="z-depth-1-half map-container-5" style="height: 300px">
               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d820598.541196199!2d-122.43399643314817!3d47.50123480206164!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5485e5ffe7c3b0f9%3A0x944278686c5ff3ba!2sWashington!5e0!3m2!1sen!2sus!4v1549396490381" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> 
+
+                    <!-- i was thinking this is where the google map will display results if we do decide to use google maps api.Yin -->
+                    <iframe id='one'
+                        width="600"
+                        height="450"
+                        frameborder="0" style="border:0"
+                        src="https://maps.google.co.uk/maps?q=moma+new+york&amp;output=embed"> 
+                       
+                    </iframe>
+                </div>
+                <div class="col-9" id="results-frame">
+                    <div id="results-buttons-up"></div>
+                    <div id="results-page"></div>
+                    <div id="results-buttons-down"></div>
+                </div>
+            </div>
+
             </div>
     
           </div>
     
         </div>
+
       </div>
        -->
     </div>
  
       <!--Google Maps-->
+
 
         <footer class="footer"></footer>
         
