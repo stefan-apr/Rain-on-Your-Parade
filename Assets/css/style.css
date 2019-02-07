@@ -33,3 +33,10 @@ footer {
     border: 2px solid black;
     border-radius: 3px;
 }
+
+canvas { /* weather icons */
+    display: block;
+    float: left;
+    margin-left: 8px;
+    margin-top: 8px;
+}
