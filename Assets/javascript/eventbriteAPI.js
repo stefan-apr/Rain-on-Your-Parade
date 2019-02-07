@@ -139,33 +139,24 @@ $(document).ready(function() {
           newButtonUp.css("margin-right", "2px");       
           $("#results-buttons-up").append(newButtonUp);
           $("#results-buttons-down").append(newButtonDown);
-          lotsOfButtons = false;
-          if(response.pagination.page_count > 9) {
-            lotsOfButtons = true;
-          }
           $("#btn-up-" + i).click(function() {
             disableButtons(response.pagination.page_count);
             getEvents(queryURL +  "&page=" + $(this).attr("value"));
-            if(lotsOfButtons) {
-              shiftButtons($(this).attr("value"), response.pagination.page_count);
-            }
+            shiftButtons($(this).attr("value"), response.pagination.page_count);
           });
           $("#btn-down-" + i).click(function() {
             disableButtons(response.pagination.page_count);                        
             getEvents(queryURL +  "&page=" + $(this).attr("value"));
-            if(lotsOfButtons) {
-              shiftButtons($(this).attr("value"), response.pagination.page_count);
-            }
+            shiftButtons($(this).attr("value"), response.pagination.page_count);
           });
         }
-        if(lotsOfButtons) {
-          shiftButtons(1, response.pagination.page_count);
-        }
+        shiftButtons(1, response.pagination.page_count);
       }
       for(var i = 0; i < response.events.length; i++) {
         var newShell = $("<div id='" + i + "-outer' class='result-shell' data-name='" + response.events[i].name.text + 
           "' data-longitude='" + response.events[i].venue.longitude + "' data-latitude='" + response.events[i].venue.latitude + 
-          "' data-start='" + response.events[i].start.local + "'>" + response.events[i].name.text + "</div>");
+          "' data-start='" + response.events[i].start.local + "' data-address='" + response.events[i].venue.address.localized_address_display + 
+          "'>" + response.events[i].name.text + "</div>");
         var newInside = $("<div id='" + i + "-inner' class='result-interior collapse'>" + "This is an inner result" + "</div>");
         var linebreak = $("<br>");
         newInside.css("display", "none");
