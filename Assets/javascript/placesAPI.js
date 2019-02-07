@@ -6,7 +6,7 @@ var selectedLocationID;
 var coordinates = {};
 
 $("#locationInput").keyup(function(){
-    $("#showPredictions").empty();
+    $(".predictionButtons").remove();
     var locationInput = $(this).val();
     console.log($(this).val());
     
