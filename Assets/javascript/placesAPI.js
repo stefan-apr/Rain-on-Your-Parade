@@ -43,7 +43,7 @@ $(document).on("click", ".predictionButtons", function(event){
     }).then(function(selectedCoordinate){
         //console.log(selectedCoordinate.result.geometry.location);
         coordinates = selectedCoordinate.result.geometry.location;
-        //console.log(coordinates);
+        console.log(coordinates);
     })
 })
 
