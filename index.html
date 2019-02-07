@@ -39,8 +39,14 @@
 
                                 <!-- autocomplete the address with placesAPI -->
 
-                                <input type="text" id="event-location" name="location" placeholder="City, State, or zip code">
-
+                                <form>
+                                    <div class="autoComplete" style="width:300px;">
+                                        <input id="locationInput" type="text" name="location" placeholder="City">
+                                    </div>
+                                    <!-- <div class="autocomplete" style="width:300px;">
+                                        <input id="myInput" type="text" name="myCountry" placeholder="City">
+                                    </div> -->
+                                </form>
                                     <!--google maps places API-->
                                 <br><br>
                                 <div id="showPredictions"></div>
@@ -152,7 +158,8 @@
 
 
         <footer class="footer"></footer>
-        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
 
@@ -169,7 +176,6 @@
 
         </script>
         <!--JQ -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <!-- BOOTSRAPS -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <!-- GOOGLE MAPS -->

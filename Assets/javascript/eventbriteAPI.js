@@ -171,16 +171,16 @@ $(document).ready(function() {
 
   // CREATING A FIREBASE EVENT.
   database.ref().on("child_added", function(snapshot) {
-    console.log(snapshot.val());
-    console.log('hi');
+    //console.log(snapshot.val());
+    //console.log('hi');
 
     var selectedCat = snapshot.val().category;
     var selectedStartDate = snapshot.val().startDate;
     var selectedEndDate = snapshot.val().endDate;
 
-    console.log(selectedCat);
-    console.log(selectedStartDate);
-    console.log(selectedEndDate + 'end');
+   //console.log(selectedCat);
+    //console.log(selectedStartDate);
+    //console.log(selectedEndDate + 'end');
     // appending to dom
     var newRow = $('<tr>').append(
     $('<td>').text(selectedCat),
