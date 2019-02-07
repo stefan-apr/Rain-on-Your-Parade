@@ -4,6 +4,7 @@ div.jumbotron {
     padding: 2em;
     color: white;
     text-shadow: 2px 2px 4px black;
+    color: darkgree
 }
 
 div.collapse {
@@ -31,4 +32,11 @@ footer {
 .result-shell {
     border: 2px solid black;
     border-radius: 3px;
+}
+
+canvas { /* weather icons */
+    display: block;
+    float: left;
+    margin-left: 8px;
+    margin-top: 8px;
 }

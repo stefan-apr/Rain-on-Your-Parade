@@ -1,24 +1,21 @@
 $(document).ready(function() {
 
-  $('.card-display').hide();
-
   // OAuth Token. (This should probably be encrypted but it's OK for now)
   var auth = "FGSMQANMR2CUSP7RFDDL";
-
   // URL to get a list of all events Eventbrite has. (For debug purposes. Not currently in use.)
-  var allEventURL =
-    "https://www.eventbriteapi.com/v3/events/search/?token=" + auth;
+  var allEventURL = "https://www.eventbriteapi.com/v3/events/search/?token=" + auth;
   // URL to get a list of all categories Eventbrite has.
   var catURL = "https://www.eventbriteapi.com/v3/categories/?token=" + auth;
   // URL to get a list of all subcategories Eventbrite has. (For debug purposes. Not currently in use.)
-
   var subcatURL = "https://www.eventbriteapi.com/v3/subcategories/?token=" + auth;
   // The URL to be queried. Modified as necessary.
   var queryURL = "";
-  // Contains all hits from the event search function.
-  var results = [];
   // Used in generating results page buttons
   var initialQuery = true;
+  // Used in deciding which buttons to show at a given time.
+  var currentPage = 1;
+  // Used to determine whether to display all buttons or not.
+  var lotsOfButtons = false;
 
   // Get list of Eventbrite categories and append them to #event-type dropdown
   $.ajax({
@@ -34,10 +31,8 @@ $(document).ready(function() {
           "'>" +
           response.categories[i].short_name +
           "</option>"
-         
       );
       $("#event-type").append(newOption); 
-      // console.log(response.categories[i].short_name + 'yay')
     }
   });
 
@@ -54,31 +49,29 @@ $(document).ready(function() {
   */
 
   $("#submit").click(function() {
+    $("#submit").attr("disabled", "disabled");
     initialQuery = true;
-    results = [];
     $("#results-buttons-up").empty();
     $("#results-buttons-down").empty();
 
     // to hide the html elements on the landing page on click to show the results.Yin
-    $('.card').hide();
-    $('.text').hide();
+    $('#centerpiece').hide();
+    $('#pop-searches').hide();
     $('#one').hide();
-    $('.card-display').show();
-
 
     var selectedStartDate = $("#start-event").val();
     var selectedEndDate = $("#end-event").val();
+    
     if(selectedStartDate <= selectedEndDate) {
       var selectedCat = $('#event-type').val();
-      var radius = 10;
-
+      var radius = $("#event-location-radius").val(); 
 
     // creating a temp obj to hold values. Yin
     var newObj = {
         category: selectedCat,
         startDate: selectedStartDate,
         endDate: selectedEndDate,
-        radius: 10
+        radius: radius
     };
 
     // push values from the temp newobj to fb
@@ -88,18 +81,14 @@ $(document).ready(function() {
       console.log(newObj.endDate);
     
     // clearing the input boxes.
-    $("#event-type").val("");
     $("#start-event").val("");
     $("#end-event").val("");
 
-
-
-    // Use the radius decleration below once this script is attached to HTML that includes the radius dropdown:
-
-      //var radius = $("#event-location-radius").val();
-
-      var latitude = "47.620422";
-      var longitude = "-122.349358";
+      var latitude = coordinates.lat; // Taken from placesAPI.js
+      var longitude = coordinates.lng; // Taken from placesAPI.js
+      if(latitude === undefined || longitude === undefined || selectedCat === undefined) {
+        return;
+      }
       var categoryPiece = "";
       var startDatePiece = "";
       var endDatePiece = "";
@@ -113,9 +102,10 @@ $(document).ready(function() {
         endDatePiece = "&start_date.range_end=" + selectedEndDate + "T00:00:01Z";
       }
 
-      queryURL = "https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
+      queryURL = "https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
         latitude + "&location.within=" + radius + "mi" + categoryPiece + startDatePiece + endDatePiece + "&expand=venue,ticket_availability,format" 
         + "&token=" + auth;
+
       getEvents(queryURL);
     } 
     // The user entered a start date that's later than the end. Display an error message. 
@@ -123,6 +113,8 @@ $(document).ready(function() {
       console.log("Invalid date entry");
       alert("Start date later than end date error. Take this alert out later.");
     }
+
+    return false;
   });
 
   function getEvents(URL) {
@@ -137,38 +129,51 @@ $(document).ready(function() {
       $("#results-page").empty();
       if(initialQuery) {
         initialQuery = false;
+        currentPage = 1;
 
         // Make results buttons if this is the first search with these terms.
-        for(var i = 0; i < response.pagination.page_count; i++) {
+        for(var i = 1; i < response.pagination.page_count; i++) {
           var newButtonUp = $("<button value='" + i + "' class='btn btn-dark' id='btn-up-" + i +"'>" + i + "</button>");
-          var newButtonDown = $("<button value='" + i + "' class='btn btn-dark' id='btn-down-" + i + "'>" + i + "</button>");         
+          var newButtonDown = $("<button value='" + i + "' class='btn btn-dark' id='btn-down-" + i + "'>" + i + "</button>");  
+          newButtonDown.css("margin-right", "2px");
+          newButtonUp.css("margin-right", "2px");       
           $("#results-buttons-up").append(newButtonUp);
           $("#results-buttons-down").append(newButtonDown);
           $("#btn-up-" + i).click(function() {
+            disableButtons(response.pagination.page_count);
             getEvents(queryURL +  "&page=" + $(this).attr("value"));
+            shiftButtons($(this).attr("value"), response.pagination.page_count);
           });
           $("#btn-down-" + i).click(function() {
+            disableButtons(response.pagination.page_count);                        
             getEvents(queryURL +  "&page=" + $(this).attr("value"));
+            shiftButtons($(this).attr("value"), response.pagination.page_count);
           });
         }
+        shiftButtons(1, response.pagination.page_count);
       }
-      results = [];
       for(var i = 0; i < response.events.length; i++) {
-        var newEvent = new event(response.events[i].id, response.events[i].name.text, response.events[i].venue.address.city, 
-          response.events[i].start.local, response.events[i].end.local, response.events[i].description.text);
-        results.push(newEvent);
         var newShell = $("<div id='" + i + "-outer' class='result-shell' data-name='" + response.events[i].name.text + 
-        "' data-longitude='" + response.events[i].venue.longitude + "' data-latitude='" + response.events[i].venue.latitude + 
-        "' data-start='" + response.events[i].start.local + "'>" + results[i].name + "</div>");
-        var newInside = $("<div id='" + i + "-inner' class='result-interior'>" + "This is an inner result" + "</div>");
+          "' data-longitude='" + response.events[i].venue.longitude + "' data-latitude='" + response.events[i].venue.latitude + 
+          "' data-start='" + response.events[i].start.local + "' data-address='" + response.events[i].venue.address.localized_address_display + 
+          "'>" + response.events[i].name.text + "</div>");
+        var newInside = $("<div id='" + i + "-inner' class='result-interior collapse'>" + "This is an inner result" + "</div>");
         var linebreak = $("<br>");
         newInside.css("display", "none");
+        newShell.click(function() {
+          console.log("Clicked a result");
+          console.log($(this));
+          if(newInside.css("display") === "none") {
+            newInside.css("display", "block");
+          } else {
+            newInside.css("display", "none");
+          }
+        }) ;
         $("#results-page").append(newShell);
         newShell.append(newInside);
         $("#results-page").append(linebreak);
+        enableButtons(response.pagination.page_count);
       }
-      console.log("Results array:");
-      console.log(results);
 
       // Recursive query for displaying all items on one page together.
       /*
@@ -178,16 +183,44 @@ $(document).ready(function() {
       }
       */
     });
+
+    function shiftButtons(curButton, totalButtons) {
+      var cur = parseInt(curButton);
+      var tot = parseInt(totalButtons);
+      for(var j = 0; j < tot; j++) {
+        $("#btn-up-" + j).css("display", "none");
+        $("#btn-down-" + j).css("display", "none");
+      }
+      for(var i = (cur - 6); i < (cur + 7); i++) {
+        $("#btn-up-" + i).css("display", "inline");
+        $("#btn-down-" + i).css("display", "inline");
+      }
+      $("#btn-up-" + currentPage).css("background-color", "black");
+      $("#btn-down-" + currentPage).css("background-color", "black");
+      $("#btn-up-" + cur).css("background-color", "darkseagreen");
+      $("#btn-down-" + cur).css("background-color", "darkseagreen");
+      $("#btn-up-" + (tot - 1)).css("display", "inline");
+      $("#btn-down-" + (tot - 1)).css("display", "inline");
+      $("#btn-up-" + 1).css("display", "inline");
+      $("#btn-down-" + 1).css("display", "inline");
+      currentPage = cur;
+    }
   }
 
-  // Event object containing the important data for each event. Can be modified as needed.
-  function event(id, name, city, startDate, endDate, description) {
-    this.id = id;
-    this.name = name;
-    this.city = city;
-    this.startDate = startDate;
-    this.endDate = endDate;
-    this.description = description;
+  function disableButtons(totalButtons) {
+    for(var i = 0; i < totalButtons; i++) {
+      $('#btn-up-' + i).attr('disabled','disabled');
+      $('#btn-down-' + i).attr('disabled','disabled');
+      $("#submit").attr("disabled", "disabled");
+    }
+  }
+
+  function enableButtons(totalButtons) {
+    for(var i = 0; i < totalButtons; i++) {
+      $('#btn-up-' + i).removeAttr('disabled');
+      $('#btn-down-' + i).removeAttr('disabled');
+      $("#submit").removeAttr("disabled");
+    }
   }
 
   // ---------------------------------------------------FIREBASE------------------------------------------------
@@ -196,16 +229,16 @@ $(document).ready(function() {
 
   // CREATING A FIREBASE EVENT.
   database.ref().on("child_added", function(snapshot) {
-    console.log(snapshot.val());
-    console.log('hi');
+    //console.log(snapshot.val());
+    //console.log('hi');
 
     var selectedCat = snapshot.val().category;
     var selectedStartDate = snapshot.val().startDate;
     var selectedEndDate = snapshot.val().endDate;
 
-    console.log(selectedCat);
-    console.log(selectedStartDate);
-    console.log(selectedEndDate + 'end');
+   //console.log(selectedCat);
+    //console.log(selectedStartDate);
+    //console.log(selectedEndDate + 'end');
     // appending to dom
     var newRow = $('<tr>').append(
     $('<td>').text(selectedCat),

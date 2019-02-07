@@ -1,16 +1,14 @@
-// default is collapsed
+// weather results div default is collapsed
 
 $(document).on("click", ".result-shell", function(event) {
     event.preventDefault();
+    console.log("clicked on a specific event");
     
-    // if ($("this").next("div").hasClass("collapse")) {
-    
+    if ($("this").next("div").hasClass("collapse")) {   // the .next("div") is the div that actually contains weather data 
         var lat = $(this).attr("data-latitude"); // pulled from eventbrite API
         var long = $(this).attr("data-longitude");// pulled from eventbrite API
-        var eventDate = moment($(this).attr("data-start"));
-
-        var today = moment();
-        var URL = "https://api.darksky.net/forecast/e3bf810172b3fa7c6960cc8b6769743c/";
+        var eventDate = moment($(this).attr("data-start")).format("x"); // pulled from eventbrite API, convert to UNIX format
+        var queryURL = "https://api.darksky.net/forecast/e3bf810172b3fa7c6960cc8b6769743c/" + lat + "," + long + "," + eventDate;
         var queryURL;
         var wxresults; 
         var wxdisplay = $("div");
@@ -29,7 +27,6 @@ $(document).on("click", ".result-shell", function(event) {
         })
             .then(function(response) {
                 wxresults = response.data;
-                console.log(queryURL);
                 console.log(wxresults);
                 for (var i=0; i<8; 1++) {
                     //var icon = wxresults.daily.data[i].icon; //
@@ -46,10 +43,9 @@ $(document).on("click", ".result-shell", function(event) {
                 $("this").attr("class", "collapse-show");
             })
 
-    /*
-    else {
-        // collapse div
-        $("this").attr("class", "collapse");
+    else {  // collapse div if it's already showing
+        $("this").next("div").attr("class", "collapse");
+        console.log("hide weather");
     }
     */
 
