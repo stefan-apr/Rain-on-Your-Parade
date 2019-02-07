@@ -41,17 +41,17 @@
                                 <label for="radius" class="form-label">Search Radius</label><br>      
                                 <select id="event-location-radius">
                                     <option id="1-mi" value="1">1 Mile</option>
-                                    <option id="5-mi" value="5">5 Miles</option>
+                                    <option id="5-mi" value="5" selected="selected">5 Miles</option>
                                     <option id="10-mi" value="10">10 Miles</option>
                                     <option id="20-mi" value="20">20 Miles</option>
                                     <option id="50-mi" value="50">50 Miles</option>
                                     <option id="100-mi" value="100">100 Miles</option>
-                                </select>                         
+                                </select>    
                                 <br><br>
                                 <div id="showPredictions"></div> <!--Is it possible to make this a dropdown? Like the one for search radius-->
                                 <label for="event-type" class="form-label">Type of event</label><br>
                                 <select id="event-type">
-                                    <option id="any-type" value="-1">Any</option>
+                                    <option id="any-type" value="-1" selected="selected">Any</option>
                                     <!-- Populate other options from Eventbrite API using jQuery -->
                                 </select>
                                 <br><br>
@@ -62,18 +62,12 @@
                                 <!--Find a way to make the second date the same or later as the first date-->
                                 <br><br>
                             </form>
-
                             <button class="btn btn-sm btn-dark" id="submit">Submit</button>
-
-                           
                         </div>
                     </div>
                 </div>
 
                 <div class="col-6" id="centerpiece">
-
-
-                
                     <div class="text">
 
                     <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
@@ -106,8 +100,8 @@
                     </iframe>
                 </div>
                 <div class="col-9" id="results-frame">
-                    <div id="results-buttons-up"></div>
-                    <div id="results-page"></div>
+                    <div id="results-buttons-up"></div><br>
+                    <div id="results-page"></div><br>
                     <div id="results-buttons-down"></div>
                 </div>
             </div>

@@ -12,6 +12,10 @@ $(document).ready(function() {
   var queryURL = "";
   // Used in generating results page buttons
   var initialQuery = true;
+  // Used in deciding which buttons to show at a given time.
+  var currentPage = 1;
+  // Used to determine whether to display all buttons or not.
+  var lotsOfButtons = false;
 
   // Get list of Eventbrite categories and append them to #event-type dropdown
   $.ajax({
@@ -45,6 +49,7 @@ $(document).ready(function() {
   */
 
   $("#submit").click(function() {
+    $("#submit").attr("disabled", "disabled");
     initialQuery = true;
     $("#results-buttons-up").empty();
     $("#results-buttons-down").empty();
@@ -76,12 +81,14 @@ $(document).ready(function() {
       console.log(newObj.endDate);
     
     // clearing the input boxes.
-    $("#event-type").val("");
     $("#start-event").val("");
     $("#end-event").val("");
 
       var latitude = coordinates.lat; // Taken from placesAPI.js
       var longitude = coordinates.lng; // Taken from placesAPI.js
+      if(latitude === undefined || longitude === undefined || selectedCat === undefined) {
+        return;
+      }
       var categoryPiece = "";
       var startDatePiece = "";
       var endDatePiece = "";
@@ -98,6 +105,7 @@ $(document).ready(function() {
       queryURL = "https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
         latitude + "&location.within=" + radius + "mi" + categoryPiece + startDatePiece + endDatePiece + "&expand=venue,ticket_availability,format" 
         + "&token=" + auth;
+
       getEvents(queryURL);
     } 
     // The user entered a start date that's later than the end. Display an error message. 
@@ -105,6 +113,8 @@ $(document).ready(function() {
       console.log("Invalid date entry");
       alert("Start date later than end date error. Take this alert out later.");
     }
+
+    return false;
   });
 
   function getEvents(URL) {
@@ -119,26 +129,44 @@ $(document).ready(function() {
       $("#results-page").empty();
       if(initialQuery) {
         initialQuery = false;
+        currentPage = 1;
 
         // Make results buttons if this is the first search with these terms.
         for(var i = 1; i < response.pagination.page_count; i++) {
           var newButtonUp = $("<button value='" + i + "' class='btn btn-dark' id='btn-up-" + i +"'>" + i + "</button>");
-          var newButtonDown = $("<button value='" + i + "' class='btn btn-dark' id='btn-down-" + i + "'>" + i + "</button>");         
+          var newButtonDown = $("<button value='" + i + "' class='btn btn-dark' id='btn-down-" + i + "'>" + i + "</button>");  
+          newButtonDown.css("margin-right", "2px");
+          newButtonUp.css("margin-right", "2px");       
           $("#results-buttons-up").append(newButtonUp);
           $("#results-buttons-down").append(newButtonDown);
+          lotsOfButtons = false;
+          if(response.pagination.page_count > 9) {
+            lotsOfButtons = true;
+          }
           $("#btn-up-" + i).click(function() {
+            disableButtons(response.pagination.page_count);
             getEvents(queryURL +  "&page=" + $(this).attr("value"));
+            if(lotsOfButtons) {
+              shiftButtons($(this).attr("value"), response.pagination.page_count);
+            }
           });
           $("#btn-down-" + i).click(function() {
+            disableButtons(response.pagination.page_count);                        
             getEvents(queryURL +  "&page=" + $(this).attr("value"));
+            if(lotsOfButtons) {
+              shiftButtons($(this).attr("value"), response.pagination.page_count);
+            }
           });
+        }
+        if(lotsOfButtons) {
+          shiftButtons(1, response.pagination.page_count);
         }
       }
       for(var i = 0; i < response.events.length; i++) {
         var newShell = $("<div id='" + i + "-outer' class='result-shell' data-name='" + response.events[i].name.text + 
           "' data-longitude='" + response.events[i].venue.longitude + "' data-latitude='" + response.events[i].venue.latitude + 
           "' data-start='" + response.events[i].start.local + "'>" + response.events[i].name.text + "</div>");
-        var newInside = $("<div id='" + i + "-inner' class='result-interior'>" + "This is an inner result" + "</div>");
+        var newInside = $("<div id='" + i + "-inner' class='result-interior collapse'>" + "This is an inner result" + "</div>");
         var linebreak = $("<br>");
         newInside.css("display", "none");
         newShell.click(function() {
@@ -153,6 +181,7 @@ $(document).ready(function() {
         $("#results-page").append(newShell);
         newShell.append(newInside);
         $("#results-page").append(linebreak);
+        enableButtons(response.pagination.page_count);
       }
 
       // Recursive query for displaying all items on one page together.
@@ -163,6 +192,44 @@ $(document).ready(function() {
       }
       */
     });
+
+    function shiftButtons(curButton, totalButtons) {
+      var cur = parseInt(curButton);
+      var tot = parseInt(totalButtons);
+      for(var j = 0; j < tot; j++) {
+        $("#btn-up-" + j).css("display", "none");
+        $("#btn-down-" + j).css("display", "none");
+      }
+      for(var i = (cur - 6); i < (cur + 7); i++) {
+        $("#btn-up-" + i).css("display", "inline");
+        $("#btn-down-" + i).css("display", "inline");
+      }
+      $("#btn-up-" + currentPage).css("background-color", "black");
+      $("#btn-down-" + currentPage).css("background-color", "black");
+      $("#btn-up-" + cur).css("background-color", "darkseagreen");
+      $("#btn-down-" + cur).css("background-color", "darkseagreen");
+      $("#btn-up-" + (tot - 1)).css("display", "inline");
+      $("#btn-down-" + (tot - 1)).css("display", "inline");
+      $("#btn-up-" + 1).css("display", "inline");
+      $("#btn-down-" + 1).css("display", "inline");
+      currentPage = cur;
+    }
+  }
+
+  function disableButtons(totalButtons) {
+    for(var i = 0; i < totalButtons; i++) {
+      $('#btn-up-' + i).attr('disabled','disabled');
+      $('#btn-down-' + i).attr('disabled','disabled');
+      $("#submit").attr("disabled", "disabled");
+    }
+  }
+
+  function enableButtons(totalButtons) {
+    for(var i = 0; i < totalButtons; i++) {
+      $('#btn-up-' + i).removeAttr('disabled');
+      $('#btn-down-' + i).removeAttr('disabled');
+      $("#submit").removeAttr("disabled");
+    }
   }
 
   // ---------------------------------------------------FIREBASE------------------------------------------------
