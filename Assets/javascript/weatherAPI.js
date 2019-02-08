@@ -46,9 +46,9 @@ $(document).on("click", ".result-shell", function(event) {
                 console.log("show weather");
             })
 
-    else {  // collapse div if it's already showing
+    {  // collapse div if it's already showing
         $("this").next("div").attr("class", "collapse");
         console.log("hide weather");
     }
 }
-})
+});

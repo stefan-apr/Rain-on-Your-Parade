@@ -59,8 +59,8 @@ $(document).ready(function() {
     $('#pop-searches').hide();
     
     // ---positioning the map after on click 
-    // $('#map').addClass('active');
-    $('#pop-searches').hide();
+    $('#map').addClass('active');
+     $('#pop-searches').hide();
 
 
 

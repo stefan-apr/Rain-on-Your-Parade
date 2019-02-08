@@ -105,4 +105,14 @@
         width:100%;
         position:absolute;
         }
-       
+         #map:active {
+            height:350px;
+            width:50%;
+            float:left;
+            overflow:clear;
+            position: relative;
+            margin: 0 auto;
+            margin-top:330px;
+            /* margin-top: -500px; */
+            /* margin-left:330px; */
+          }
