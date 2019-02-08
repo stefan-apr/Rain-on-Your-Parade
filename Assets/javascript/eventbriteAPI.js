@@ -79,7 +79,9 @@ $(document).ready(function() {
         radius: radius
     };
 
-    // push values from the temp newobj to fb
+    // push values from the temp newobj to fb.  
+    
+    var database = firebase.database();
     database.ref().push(newObj);
       console.log(newObj);
       console.log(newObj.startDate);
@@ -232,7 +234,7 @@ $(document).ready(function() {
   // ---------------------------------------------------FIREBASE------------------------------------------------
 
 
-  //  LIMITING ITMES PRINTED TO DOM TO 5
+  //  LIMITING ITEMS PRINTED TO DOM TO 5
   var database = firebase.database().ref().limitToLast(5);
 
   // CREATING A FIREBASE EVENT.
