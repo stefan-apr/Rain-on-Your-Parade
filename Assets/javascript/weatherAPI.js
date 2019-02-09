@@ -44,9 +44,9 @@ $(document).on("click", ".result-shell", function(event) {
                 $("this").next("div").append(wxdisplay);
                 $("this").next("div").attr("class", "collapse-show");  // shows the div once it's populated with weather data
             })
+        }
 
     else {  // collapse div if it's already showing
         $("this").next("div").attr("class", "collapse");
     }
-}
-})
+});
