@@ -53,14 +53,13 @@ $(document).ready(function() {
     initialQuery = true;
     $("#results-buttons-up").empty();
     $("#results-buttons-down").empty();
-
-    // to hide the html elements on the landing page on click to show the results
-    $('#centerpiece').hide();
-    $('#pop-searches').hide();
     
     // ---positioning the map after on click 
     $('#map').addClass('active');
-     $('#pop-searches').hide();
+    //  $('#pop-searches').hide();
+    $('#centerpiece h4').hide();
+    
+    
 
 
 
@@ -73,10 +72,11 @@ $(document).ready(function() {
 
     // creating a temp obj to hold values. Yin
     var newObj = {
-        category: categoryPiece,
+        category: selectedCat,
         startDate: selectedStartDate,
         endDate: selectedEndDate,
-        radius: radius
+        radius: radius,
+       
     };
 
     // push values from the temp newobj to fb.  
@@ -86,6 +86,7 @@ $(document).ready(function() {
       console.log(newObj);
       console.log(newObj.startDate);
       console.log(newObj.endDate);
+      
     
     // clearing the input boxes.
     $("#start-event").val("");

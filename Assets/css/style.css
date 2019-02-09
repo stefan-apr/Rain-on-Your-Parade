@@ -33,6 +33,8 @@ canvas { /* weather icons */
     margin-left: 8px;
     margin-top: 8px;
 }
-h5 {
-    text-align:center;
+#results-frame{
+    margin:0 auto;
+    margin-left:300px;
+    margin-top:-150px;
 }
