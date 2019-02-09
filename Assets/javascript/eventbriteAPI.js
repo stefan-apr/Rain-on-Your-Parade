@@ -54,10 +54,15 @@ $(document).ready(function() {
     $("#results-buttons-up").empty();
     $("#results-buttons-down").empty();
 
-    // to hide the html elements on the landing page on click to show the results.Yin
+    // to hide the html elements on the landing page on click to show the results
     $('#centerpiece').hide();
     $('#pop-searches').hide();
-    $('#one').hide();
+    
+    // ---positioning the map after on click 
+    $('#map').addClass('active');
+     $('#pop-searches').hide();
+
+
 
     var selectedStartDate = $("#start-event").val();
     var selectedEndDate = $("#end-event").val();
@@ -68,13 +73,15 @@ $(document).ready(function() {
 
     // creating a temp obj to hold values. Yin
     var newObj = {
-        category: selectedCat,
+        category: categoryPiece,
         startDate: selectedStartDate,
         endDate: selectedEndDate,
         radius: radius
     };
 
-    // push values from the temp newobj to fb
+    // push values from the temp newobj to fb.  
+    
+    var database = firebase.database();
     database.ref().push(newObj);
       console.log(newObj);
       console.log(newObj.startDate);
@@ -83,6 +90,7 @@ $(document).ready(function() {
     // clearing the input boxes.
     $("#start-event").val("");
     $("#end-event").val("");
+    $("#event-type").val("");
 
       var latitude = coordinates.lat; // Taken from placesAPI.js
       var longitude = coordinates.lng; // Taken from placesAPI.js
@@ -224,28 +232,33 @@ $(document).ready(function() {
   }
 
   // ---------------------------------------------------FIREBASE------------------------------------------------
- 
-  var database = firebase.database();
+
+
+  //  LIMITING ITEMS PRINTED TO DOM TO 5
+  var database = firebase.database().ref().limitToLast(5);
 
   // CREATING A FIREBASE EVENT.
-  database.ref().on("child_added", function(snapshot) {
+  
+  database.on("child_added", function(snapshot) {
     //console.log(snapshot.val());
-    //console.log('hi');
+    
+    // snapshot.ref().remove(); -------WANTING TO CLEAR THE FB DATA FOR A REFRESH START, BUT NOT WORKING
 
-    var selectedCat = snapshot.val().category;
-    var selectedStartDate = snapshot.val().startDate;
-    var selectedEndDate = snapshot.val().endDate;
+   var categoryPiece = snapshot.val().category;
+   console.log('hi yall')
+  //   var selectedStartDate = snapshot.val().startDate;
+  //   var selectedEndDate = snapshot.val().endDate;
 
-   //console.log(selectedCat);
-    //console.log(selectedStartDate);
-    //console.log(selectedEndDate + 'end');
-    // appending to dom
+  //  //console.log(selectedCat);
+  //   //console.log(selectedStartDate);
+  //   //console.log(selectedEndDate + 'end');
+  //   // appending to dom
     var newRow = $('<tr>').append(
-    $('<td>').text(selectedCat),
-    $('<td>').text(selectedStartDate),
-    $('<td>').text(selectedEndDate)
+    $('<td>').text(categoryPiece),
+    // $('<td>').text(selectedStartDate),
+    // $('<td>').text(selectedEndDate)
     );
 
-    $('#results-table > tbody').append(newRow);
-  });
+   $('#results-table > tbody').append(newRow);
+   });
 });
