@@ -81,8 +81,8 @@
               
                 <div class="col-6" id="centerpiece">
                     <div class="text">
-                    <p>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</p>
-                    <p>Other interesting text here blahblahblah</p>
+                    <h4>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</h4>
+                    <!-- <p>Other interesting text here blahblahblah</p> -->
                     </div>
                 </div>
 
@@ -91,48 +91,24 @@
                     <div class="card">
                         <div class="card-header"><h3 class="card-title">Most popular searches</h3></div>
                         <div class="card-body">
-                             <ol>
-                                Contents of this list dynamically generated from firebase
-                                <li>stuff</li>
-                                <li>stuff</li>
-                                <li>stuff</li>
-                                <li>stuff</li>
-                                <li>stuff</li>
-                            </ol> 
+                            <table class="table" id='results-table'>
+                                <thead>
+                                    <tr>
+                                        <th>Last Searched Cat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                <!-- </div> -->
 
-
-         <!--GOOGLE MAPS. YIN-->
-         <input type="text" class="form-control" id="pac-input" aria-describedby="search" placeholder="Search Box">
-         <div id="map">
-                google
-        </div>
- 
-   <!--GOOGLE MAPS IFRAME
-     <div class="col-md-6 mb-4"></div>
-
-        <div class="card card-cascade narrower">
-          <div class="view view-cascade gradient-card-header peach-gradient">
-            <h5 class="mb-0">Custom map</h5>
-          </div>
+                    </div> 
+                 </div>
          
-          <div class="card-body card-body-cascade text-center">
-    
-           Google map
-            <div id="map-container-google-9" class="z-depth-1-half map-container-5" style="height: 300px">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d820598.541196199!2d-122.43399643314817!3d47.50123480206164!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5485e5ffe7c3b0f9%3A0x944278686c5ff3ba!2sWashington!5e0!3m2!1sen!2sus!4v1549396490381" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> 
+                <!------------------GOOGLE MAPS------------>
+                
+                <div id="map"></div>
 
-                    <!-- i was thinking this is where the google map will display results if we do decide to use google maps api.Yin -->
-                    <iframe id='one'
-                        width="600"
-                        height="450"
-                        frameborder="0" style="border:0"
-                        src="https://maps.google.co.uk/maps?q=moma+new+york&amp;output=embed"> 
-                       
-                    </iframe>
-                </div>
                 <div class="col-9" id="results-frame">
                     <div id="results-buttons-up"></div>
                     <img src="Assets/images/load.gif" id="load" alt="Loading..."><br>
@@ -152,10 +128,9 @@
         </div>
 
       </div>
-       -->
+    
     </div>
  
-      <!--Google Maps-->
 
 
         <footer class="footer"></footer>
@@ -167,13 +142,11 @@
         <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
         <script src="Assets/javascript/placesAPI.js"></script>
         <script src="Assets/javascript/eventbriteAPI.js"></script>
+        <script src="Assets/javascript/skycons.js"></script> <!-- weather icons for weather API -->
         <script src="Assets/javascript/weatherAPI.js"></script>
         <script src="Assets/javascript/googleMaps.js"></script>
-
-        <script src="Assets/javascript/firebase.js"></script>  <!--added -->
-
-
-        <!-------------------- TESTING GOOGLE MAPS------------------ -->
+        <script src="Assets/javascript/firebase.js"></script> 
+    
 
         </script>
         <!--JQ -->

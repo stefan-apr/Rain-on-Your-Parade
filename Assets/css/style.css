@@ -16,13 +16,6 @@ div.collapse-show {
     display: block;
 }
 
-.iframe{
-    border:2px dotted green;
-    float:left;
-    position: relative;
-
-}
-
 footer {
     background-image: url(../images/rain.jpg);
     background-size: cover;
@@ -70,4 +63,7 @@ canvas { /* weather icons */
 #page-search {
     margin-bottom: 1%;
     display: none;
+  
+h5 {
+    text-align:center;
 }
