@@ -40,3 +40,24 @@ canvas { /* weather icons */
     margin-left: 8px;
     margin-top: 8px;
 }
+
+.predictionButtons {
+  
+}
+
+.predictionButtons:hover {
+    cursor: pointer;
+    background-color: rgb(206, 206, 206)
+}
+
+.autoComplete {
+    background-color: rgb(241, 241, 241);
+}
+
+#locationInput {
+    width: 100%
+}
+
+#keyword {
+    width: 100%;
+}

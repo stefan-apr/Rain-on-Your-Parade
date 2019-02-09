@@ -33,7 +33,9 @@
                         <div class="card-body">
                             <form id="form">
                                 <label for="keyword" class="form-label">Keyword</label><br>
-                                <input type="text" id="keyword" placeholder="">
+                                <div>
+                                    <input type="text" id="keyword" placeholder="">
+                                </div>
                                 <br><br>
                                 <label for="event-location" class="form-label">Location</label><br>
 
@@ -43,13 +45,10 @@
                                     <div class="autoComplete">
                                         <input id="locationInput" type="text" name="location" placeholder="City">
                                     </div>
-                                    <!-- <div class="autocomplete" style="width:300px;">
-                                        <input id="myInput" type="text" name="myCountry" placeholder="City">
-                                    </div> -->
+                                    
                                 </form>
                                     <!--google maps places API-->
                                 <br><br>
-                                <div id="showPredictions"></div>
                                 <label for="radius" class="form-label">Search Radius</label><br>      
                                 <select id="event-location-radius">
                                     <option id="1-mi" value="1">1 Mile</option>
@@ -60,7 +59,6 @@
                                     <option id="100-mi" value="100">100 Miles</option>
                                 </select>    
                                 <br><br>
-                                <div id="showPredictions"></div> <!--Is it possible to make this a dropdown? Like the one for search radius-->
                                 <label for="event-type" class="form-label">Type of event</label><br>
                                 <select id="event-type">
                                     <option id="any-type" value="-1" selected="selected">Any</option>
