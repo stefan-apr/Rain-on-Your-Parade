@@ -1,10 +1,11 @@
 // weather results div default is collapsed
 
-$(document).on("click", ".result-shell", function(event) {
+$("#results-page").on("click", ".result-shell", function(event) {
     event.preventDefault();
     console.log("clicked on a specific event");
     
-    if ($("this").next("div").hasClass("collapse")) {   // the .next("div") is the div that actually contains weather data 
+    if ($(this).find("div").hasClass("collapse")) {   // the .next("div") is the div that actually contains weather data 
+        console.log("show weather");
         var lat = $(this).attr("data-latitude"); // pulled from eventbrite API
         var long = $(this).attr("data-longitude");// pulled from eventbrite API
         var eventDate = moment($(this).attr("data-start")).format("x"); // pulled from eventbrite API, convert to UNIX format
@@ -12,10 +13,12 @@ $(document).on("click", ".result-shell", function(event) {
         var queryURL;
         var wxresults; 
         var wxdisplay = $("div");
+
+        var proxy = 'https://cors-anywhere.herokuapp.com/';
     
         $.ajax({
-            url: queryURL,
-            method: "GET"
+            url: proxy + queryURL
+            // method: "GET"
         })
             .then(function(response) {
                 wxresults = response.data;
@@ -41,14 +44,17 @@ $(document).on("click", ".result-shell", function(event) {
                     "mph<br>Cloud cover: " + cloud +
                     "<br>");
                 
-                $("this").next("div").append(wxdisplay);
-                $("this").next("div").attr("class", "collapse-show");  // shows the div once it's populated with weather data
-                console.log("show weather");
+                $(this).find("div").append(wxdisplay);
             })
+            $(this).find("div").attr("class", "collapse-show");  // shows the div once it's populated with weather data
+            
         }
 
-    {  // collapse div if it's already showing
-        $("this").next("div").attr("class", "collapse");
+    else if ($(this).find("div").hasClass("collapse-show")) {  // collapse div if it's already showing
+        $(this).find("div").attr("class", "collapse");
         console.log("hide weather");
+    }
+    else {
+        console.log("error");
     }
 });
