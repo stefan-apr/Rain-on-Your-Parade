@@ -34,6 +34,27 @@ canvas { /* weather icons */
     margin-top: 8px;
 }
 
+<<<<<<< HEAD
+.predictionButtons {
+  
+}
+
+.predictionButtons:hover {
+    cursor: pointer;
+    background-color: rgb(206, 206, 206)
+}
+
+.autoComplete {
+    background-color: rgb(241, 241, 241);
+}
+
+#locationInput {
+    width: 100%
+}
+
+#keyword {
+    width: 100%;
+=======
 #results-frame{
     margin:0 auto;
     margin-left:300px;
@@ -74,4 +95,5 @@ canvas { /* weather icons */
 h5{
     text-align:center;
 
+>>>>>>> 7a791f53906e71a5ed3ca7dc8f9109e89c6de7dc
 }
