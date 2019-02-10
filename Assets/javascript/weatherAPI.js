@@ -51,5 +51,4 @@ $(document).on("click", ".result-shell", function(event) {
         $("this").next("div").attr("class", "collapse");
         console.log("hide weather");
     }
-}
 });
