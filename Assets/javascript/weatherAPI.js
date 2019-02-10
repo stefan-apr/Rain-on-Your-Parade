@@ -45,6 +45,7 @@ $(document).on("click", ".result-shell", function(event) {
                 $("this").next("div").attr("class", "collapse-show");  // shows the div once it's populated with weather data
                 console.log("show weather");
             })
+        }
 
     {  // collapse div if it's already showing
         $("this").next("div").attr("class", "collapse");

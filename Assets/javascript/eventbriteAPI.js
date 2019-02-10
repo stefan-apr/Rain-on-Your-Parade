@@ -14,8 +14,8 @@ $(document).ready(function() {
   var initialQuery = true;
   // Used in deciding which buttons to show at a given time.
   var currentPage = 1;
-  // Used to determine whether to display all buttons or not.
-  var lotsOfButtons = false;
+  // Total number of page buttons. Used in page navigation.
+  var numButtons = 0;
 
   // Get list of Eventbrite categories and append them to #event-type dropdown
   $.ajax({
@@ -67,6 +67,7 @@ $(document).ready(function() {
 
     var selectedStartDate = $("#start-event").val();
     var selectedEndDate = $("#end-event").val();
+    var selectedKeyword = $("#keyword").val();
     
     if(selectedStartDate <= selectedEndDate) {
       var selectedCat = $('#event-type').val();
@@ -74,19 +75,21 @@ $(document).ready(function() {
       var selectedCatName = $('#event-type option:selected').text();
       var radius = $("#event-location-radius").val(); 
 
+
       console.log(selectedCat)
       console.log(typeof selectedCat)
       if(selectedCat !== '-1' && selectedCat !== null) {
         console.log('selectedCat is !== -1')
+
         categoryPiece = "&categories=" + selectedCat;
       } else {
         console.log('selectedCat is === -1')
         console.log(categoryPiece);
       }
-      if(selectedStartDate !== "") {
+      if(selectedStartDate !== "" && selectedStartDate !== undefined) {
         startDatePiece = "&start_date.range_start=" + selectedStartDate + "T00:00:01Z";
       }
-      if(selectedEndDate !== "") {
+      if(selectedEndDate !== "" && selectedEndDate !== undefined) {
         endDatePiece = "&start_date.range_end=" + selectedEndDate + "T00:00:01Z";
       }
 
@@ -120,21 +123,29 @@ $(document).ready(function() {
       }
     
       queryURL = "https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
-        latitude + "&location.within=" + radius + "mi" + categoryPiece + startDatePiece + endDatePiece + "&expand=venue,ticket_availability,format" 
-        + "&token=" + auth;
+        latitude + "&location.within=" + radius + "mi" + categoryPiece + startDatePiece + endDatePiece + keywordPiece + "&sort_by=distance" + 
+        "&expand=venue,ticket_availability,format" + "&token=" + auth;
 
         console.log(queryURL)
 
       getEvents(queryURL);
-
     } 
+
     // The user entered a start date that's later than the end. Display an error message. 
     else {
-      console.log("Invalid date entry");
-      alert("Start date later than end date error. Take this alert out later.");
+      console.log("Invalid date entry: Start date later than end date");
     }
+  }); 
 
-    return false;
+  // Set up results page switch function
+  $("#page-sub").click(function() {
+    if($("#go-to-page").val().match(/^-?\d+\.?\d*$/) && $("#go-to-page").val() <= numButtons && $("#go-to-page").val() > 0) {
+      disableButtons(numButtons);
+      getEvents(queryURL +  "&page=" + parseInt($("#go-to-page").val()));
+      shiftButtons($("#go-to-page").val(), numButtons);
+    } else {
+      console.log("Not a valid page #");
+    }
   });
 
   function getEvents(URL) {
@@ -152,7 +163,7 @@ $(document).ready(function() {
         currentPage = 1;
 
         // Make results buttons if this is the first search with these terms.
-        for(var i = 1; i < response.pagination.page_count; i++) {
+        for(var i = 1; i <= response.pagination.page_count; i++) {
           var newButtonUp = $("<button value='" + i + "' class='btn btn-dark' id='btn-up-" + i +"'>" + i + "</button>");
           var newButtonDown = $("<button value='" + i + "' class='btn btn-dark' id='btn-down-" + i + "'>" + i + "</button>");  
           newButtonDown.css("margin-right", "2px");
@@ -170,7 +181,9 @@ $(document).ready(function() {
             shiftButtons($(this).attr("value"), response.pagination.page_count);
           });
         }
-        shiftButtons(1, response.pagination.page_count);
+        numButtons = response.pagination.page_count;
+        shiftButtons(1, numButtons);
+        $("#page-search").css("display", "block");
       }
       for(var i = 0; i < response.events.length; i++) {
         var newShell = $("<div id='" + i + "-outer' class='result-shell' data-name='" + response.events[i].name.text + 
@@ -179,20 +192,11 @@ $(document).ready(function() {
           "'>" + response.events[i].name.text + "</div>");
         var newInside = $("<div id='" + i + "-inner' class='result-interior collapse'>" + "This is an inner result" + "</div>");
         var linebreak = $("<br>");
-        newInside.css("display", "none");
-        newShell.click(function() {
-          console.log("Clicked a result");
-          console.log($(this));
-          if(newInside.css("display") === "none") {
-            newInside.css("display", "block");
-          } else {
-            newInside.css("display", "none");
-          }
-        }) ;
+        
         $("#results-page").append(newShell);
         newShell.append(newInside);
         $("#results-page").append(linebreak);
-        enableButtons(response.pagination.page_count);
+        enableButtons(numButtons);
       }
 
       // Recursive query for displaying all items on one page together.
@@ -203,44 +207,48 @@ $(document).ready(function() {
       }
       */
     });
+  }
 
-    function shiftButtons(curButton, totalButtons) {
-      var cur = parseInt(curButton);
-      var tot = parseInt(totalButtons);
-      for(var j = 0; j < tot; j++) {
-        $("#btn-up-" + j).css("display", "none");
-        $("#btn-down-" + j).css("display", "none");
-      }
-      for(var i = (cur - 6); i < (cur + 7); i++) {
-        $("#btn-up-" + i).css("display", "inline");
-        $("#btn-down-" + i).css("display", "inline");
-      }
-      $("#btn-up-" + currentPage).css("background-color", "black");
-      $("#btn-down-" + currentPage).css("background-color", "black");
-      $("#btn-up-" + cur).css("background-color", "darkseagreen");
-      $("#btn-down-" + cur).css("background-color", "darkseagreen");
-      $("#btn-up-" + (tot - 1)).css("display", "inline");
-      $("#btn-down-" + (tot - 1)).css("display", "inline");
-      $("#btn-up-" + 1).css("display", "inline");
-      $("#btn-down-" + 1).css("display", "inline");
-      currentPage = cur;
+  function shiftButtons(curButton, totalButtons) {
+    var cur = parseInt(curButton);
+    var tot = parseInt(totalButtons);
+    for(var j = 0; j < tot; j++) {
+      $("#btn-up-" + j).css("display", "none");
+      $("#btn-down-" + j).css("display", "none");
     }
+    for(var i = (cur - 4); i < (cur + 5); i++) {
+      $("#btn-up-" + i).css("display", "inline");
+      $("#btn-down-" + i).css("display", "inline");
+    }
+    $("#btn-up-" + currentPage).css("background-color", "black");
+    $("#btn-down-" + currentPage).css("background-color", "black");
+    $("#btn-up-" + cur).css("background-color", "darkseagreen");
+    $("#btn-down-" + cur).css("background-color", "darkseagreen");
+    $("#btn-up-" + (tot)).css("display", "inline");
+    $("#btn-down-" + (tot)).css("display", "inline");
+    $("#btn-up-" + 1).css("display", "inline");
+    $("#btn-down-" + 1).css("display", "inline");
+    currentPage = cur;
   }
 
   function disableButtons(totalButtons) {
-    for(var i = 0; i < totalButtons; i++) {
+    for(var i = 0; i <= totalButtons; i++) {
       $('#btn-up-' + i).attr('disabled','disabled');
       $('#btn-down-' + i).attr('disabled','disabled');
-      $("#submit").attr("disabled", "disabled");
     }
+    $("#submit").attr("disabled", "disabled");
+    $("#page-sub").attr("disabled", "disabled");
+    $("#load").css("display", "block");
   }
 
   function enableButtons(totalButtons) {
-    for(var i = 0; i < totalButtons; i++) {
+    for(var i = 0; i <= totalButtons; i++) {
       $('#btn-up-' + i).removeAttr('disabled');
       $('#btn-down-' + i).removeAttr('disabled');
-      $("#submit").removeAttr("disabled");
     }
+    $("#submit").removeAttr("disabled");
+    $("#page-sub").removeAttr("disabled");
+    $("#load").css("display", "none");
   }
 
   // ---------------------------------------------------FIREBASE------------------------------------------------
