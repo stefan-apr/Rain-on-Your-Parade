@@ -38,3 +38,37 @@ canvas { /* weather icons */
     margin-left:300px;
     margin-top:-150px;
 }
+
+#results-buttons-up {
+    height: 45px;
+    width: 100%;
+    float: left;
+}
+
+#results-buttons-down {
+    height: 45px;
+    width: 100%;
+    float: left;
+}
+
+#results-page {
+    float: left;
+    width: 100%;
+}
+
+#load {
+    position: absolute;
+    display: none;
+    height: 45px;
+    width: 5%;
+    left: 5%;
+    top: -0.1%;
+}
+#page-search {
+    margin-bottom: 1%;
+    display: none;
+}
+  
+h5 {
+    text-align:center;
+}
