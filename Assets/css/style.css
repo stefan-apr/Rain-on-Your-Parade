@@ -38,6 +38,7 @@ canvas { /* weather icons */
     margin:0 auto;
     margin-left:300px;
     margin-top:-150px;
+}
 
 #results-buttons-up {
     height: 45px;
@@ -68,8 +69,9 @@ canvas { /* weather icons */
 #page-search {
     margin-bottom: 1%;
     display: none;
+}
   
-h5 {
+h5{
     text-align:center;
 
 }
