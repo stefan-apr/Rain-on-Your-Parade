@@ -49,20 +49,21 @@ $(document).ready(function() {
   */
 
   $("#submit").click(function() {
+
     $("#submit").attr("disabled", "disabled");
     initialQuery = true;
     $("#results-buttons-up").empty();
     $("#results-buttons-down").empty();
-
-    // to hide the html elements on the landing page on click to show the results
-    $('#centerpiece').hide();
-    $('#pop-searches').hide();
     
     // ---positioning the map after on click 
     $('#map').addClass('active');
-     $('#pop-searches').hide();
+    //  $('#pop-searches').hide();
+    $('#centerpiece h4').hide();
 
 
+    var categoryPiece = "";
+    var startDatePiece = "";
+    var endDatePiece = "";
 
     var selectedStartDate = $("#start-event").val();
     var selectedEndDate = $("#end-event").val();
@@ -70,46 +71,20 @@ $(document).ready(function() {
     
     if(selectedStartDate <= selectedEndDate) {
       var selectedCat = $('#event-type').val();
+      // printing of user input to dom. **option:selected
+      var selectedCatName = $('#event-type option:selected').text();
       var radius = $("#event-location-radius").val(); 
 
-    // creating a temp obj to hold values. Yin
-    var newObj = {
-        category: categoryPiece,
-        startDate: selectedStartDate,
-        endDate: selectedEndDate,
-        radius: radius
-    };
 
-    // push values from the temp newobj to fb.  
-    
-    var database = firebase.database();
-    database.ref().push(newObj);
-      console.log(newObj);
-      console.log(newObj.startDate);
-      console.log(newObj.endDate);
-    
-    // clearing the input boxes.
-    $("#start-event").val("");
-    $("#end-event").val("");
-    $("#keyword").val("");
+      console.log(selectedCat)
+      console.log(typeof selectedCat)
+      if(selectedCat !== '-1' && selectedCat !== null) {
+        console.log('selectedCat is !== -1')
 
-
-      var latitude = coordinates.lat; // Taken from placesAPI.js
-      var longitude = coordinates.lng; // Taken from placesAPI.js
-      if(latitude === undefined || longitude === undefined || selectedCat === undefined || radius === undefined) {
-        console.log("Vital field not filled");
-        enableButtons(0);
-        return;
-      }
-      var categoryPiece = "";
-      var startDatePiece = "";
-      var endDatePiece = "";
-      var keywordPiece = "";
-      if(selectedKeyword !== -1 && selectedKeyword !== undefined) {
-        keywordPiece = "&q=" + selectedKeyword;
-      }
-      if(parseInt(selectedCat) !== -1) {
         categoryPiece = "&categories=" + selectedCat;
+      } else {
+        console.log('selectedCat is === -1')
+        console.log(categoryPiece);
       }
       if(selectedStartDate !== "" && selectedStartDate !== undefined) {
         startDatePiece = "&start_date.range_start=" + selectedStartDate + "T00:00:01Z";
@@ -118,12 +93,44 @@ $(document).ready(function() {
         endDatePiece = "&start_date.range_end=" + selectedEndDate + "T00:00:01Z";
       }
 
+      // creating a temp obj to hold values. 
+      var newObj = {
+          category: categoryPiece,
+          // added this for the new prop just added
+          categoryName: selectedCatName,
+          startDate: selectedStartDate,
+          endDate: selectedEndDate,
+          radius: radius
+      };
+
+      // push values from the temp newobj to fb.  
+      
+      var database = firebase.database();
+      database.ref().push(newObj);
+        console.log(newObj);
+        console.log(newObj.startDate);
+        console.log(newObj.endDate);
+      
+      // clearing the input boxes.
+      // $("#start-event").val("");
+      // $("#end-event").val("");
+      // $("#event-type").val("");
+
+      var latitude = coordinates.lat; // Taken from placesAPI.js
+      var longitude = coordinates.lng; // Taken from placesAPI.js
+      if(latitude === undefined || longitude === undefined || selectedCat === undefined) {
+        return;
+      }
+    
       queryURL = "https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
         latitude + "&location.within=" + radius + "mi" + categoryPiece + startDatePiece + endDatePiece + keywordPiece + "&sort_by=distance" + 
         "&expand=venue,ticket_availability,format" + "&token=" + auth;
 
+        console.log(queryURL)
+
       getEvents(queryURL);
-    }
+    } 
+
     // The user entered a start date that's later than the end. Display an error message. 
     else {
       console.log("Invalid date entry: Start date later than end date");
@@ -248,7 +255,7 @@ $(document).ready(function() {
 
 
   //  LIMITING ITEMS PRINTED TO DOM TO 5
-  var database = firebase.database().ref().limitToLast(5);
+  var database = firebase.database().ref().limitToLast(8);
 
   // CREATING A FIREBASE EVENT.
   
@@ -257,7 +264,7 @@ $(document).ready(function() {
     
     // snapshot.ref().remove(); -------WANTING TO CLEAR THE FB DATA FOR A REFRESH START, BUT NOT WORKING
 
-   var categoryPiece = snapshot.val().category;
+   var categoryPiece = snapshot.val().categoryName;
    console.log('hi yall')
   //   var selectedStartDate = snapshot.val().startDate;
   //   var selectedEndDate = snapshot.val().endDate;

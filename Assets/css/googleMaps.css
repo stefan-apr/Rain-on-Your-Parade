@@ -11,7 +11,8 @@
         position: relative;
         margin: 0 auto;
         margin-top: -500px;
-        /* margin-left:330px; */
+        margin-left:300px; 
+        align-content: space-around;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -105,14 +106,16 @@
         width:100%;
         position:absolute;
         }
-         #map:active {
+      #map.active {
             height:350px;
             width:50%;
             float:left;
             overflow:clear;
             position: relative;
             margin: 0 auto;
-            margin-top:330px;
-            /* margin-top: -500px; */
-            /* margin-left:330px; */
+            margin-top: -680px;
+            margin-left:280px;
+          }
+      #pop-searches{
+            padding-left:30px;
           }

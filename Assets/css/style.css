@@ -34,6 +34,11 @@ canvas { /* weather icons */
     margin-top: 8px;
 }
 
+#results-frame{
+    margin:0 auto;
+    margin-left:300px;
+    margin-top:-150px;
+
 #results-buttons-up {
     height: 45px;
     width: 100%;
@@ -66,4 +71,5 @@ canvas { /* weather icons */
   
 h5 {
     text-align:center;
+
 }
