@@ -28,7 +28,7 @@ $(document).on("click", ".result-shell", function(event) {
             .then(function(response) {
                 wxresults = response.data;
                 console.log(wxresults);
-                for (var i=0; i<8; 1++) {
+                for (var i=0; i<8; i++) {
                     //var icon = wxresults.daily.data[i].icon; //
                     var summary = wxresults.daily.data[i].summary;
                     var rain = wxresults.daily.data[i].precipProbability;
@@ -48,11 +48,4 @@ $(document).on("click", ".result-shell", function(event) {
         $("this").next("div").attr("class", "collapse");
         console.log("hide weather");
     }
-<<<<<<< HEAD
-    */
-
-    }
-})
-=======
 });
->>>>>>> 7a791f53906e71a5ed3ca7dc8f9109e89c6de7dc
