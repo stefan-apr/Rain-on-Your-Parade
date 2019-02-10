@@ -42,12 +42,17 @@ $(document).on("click", ".result-shell", function(event) {
                 $("this").append(wxdisplay);
                 $("this").attr("class", "collapse-show");
             })
+        }
 
-    else {  // collapse div if it's already showing
+    {  // collapse div if it's already showing
         $("this").next("div").attr("class", "collapse");
         console.log("hide weather");
     }
+<<<<<<< HEAD
     */
 
     }
 })
+=======
+});
+>>>>>>> 7a791f53906e71a5ed3ca7dc8f9109e89c6de7dc
