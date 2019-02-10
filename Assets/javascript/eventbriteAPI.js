@@ -81,7 +81,6 @@ $(document).ready(function() {
       console.log(typeof selectedCat);
       if(selectedCat !== '-1' && selectedCat !== null) {
         console.log('selectedCat is !== -1');
-
         categoryPiece = "&categories=" + selectedCat;
       } else {
         console.log('selectedCat is === -1')

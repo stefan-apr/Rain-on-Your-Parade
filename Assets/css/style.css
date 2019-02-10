@@ -4,7 +4,7 @@ div.jumbotron {
     padding: 2em;
     color: white;
     text-shadow: 2px 2px 4px black;
-    color: darkgree
+    color: whitesmoke;
 }
 
 div.collapse {
@@ -34,7 +34,6 @@ canvas { /* weather icons */
     margin-top: 8px;
 }
 
-<<<<<<< HEAD
 .predictionButtons {
   
 }
@@ -54,11 +53,12 @@ canvas { /* weather icons */
 
 #keyword {
     width: 100%;
-=======
+}
+
 #results-frame{
-    margin:0 auto;
+    margin: auto;
     margin-left:300px;
-    margin-top:-150px;
+    margin-top:-300px;
 }
 
 #results-buttons-up {
@@ -81,9 +81,9 @@ canvas { /* weather icons */
 #load {
     position: absolute;
     display: none;
-    height: 45px;
+    height: 40px;
     width: 5%;
-    left: 5%;
+    right: 5%;
     top: -0.1%;
 }
 
@@ -94,6 +94,4 @@ canvas { /* weather icons */
   
 h5{
     text-align:center;
-
->>>>>>> 7a791f53906e71a5ed3ca7dc8f9109e89c6de7dc
 }
