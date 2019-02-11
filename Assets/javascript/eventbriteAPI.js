@@ -52,6 +52,12 @@ function geocodeAddress(Localaddress, geocoder, resultsMap) {
   });
 }
 
+$(".updateMap").on("click", function(){
+  $("#map").removeClass('mapHidden');
+  //$("#map").attr('class', 'mapDisplayed')
+  console.log("oooooooverrrr")
+})
+
 $(document).ready(function() {
 
   // OAuth Token. (This should probably be encrypted but it's OK for now)
@@ -262,7 +268,6 @@ $(document).ready(function() {
         $("#results-page").append(linebreak);
         enableButtons(numButtons);
       }
-<<<<<<< HEAD
 
 
 
@@ -273,8 +278,6 @@ $(document).ready(function() {
         getEvents(queryURL +  "&page=" + nextPage);
       }
       */
-=======
->>>>>>> aef6d24bcf6f75a7ab54dd508e5a6b6f4db7d920
     });
   }
 
