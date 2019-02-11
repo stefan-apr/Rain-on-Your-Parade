@@ -3,7 +3,7 @@
 $("#results-page").on("click", ".result-shell", function(event) {
     event.preventDefault();
     console.log("click on event");
-    // var that = $(this);
+    // var that = $(this); there's an issue somewhere with $(this)
     
     if ($(this).children().hasClass("collapse")) {   // the .children(".result-interior") is the div that actually contains weather data, starts out collapsed by default
         console.log("show weather");
@@ -33,7 +33,7 @@ $("#results-page").on("click", ".result-shell", function(event) {
                 var humid = wxresults.humidity;
                 var wind = wxresults.windSpeed;
                 var cloud = wxresults.cloudCover;
-                
+            
                 // weather icons
                 var icons = new Skycons(),
                 list  = [
