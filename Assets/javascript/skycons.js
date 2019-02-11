@@ -53,7 +53,6 @@
         dx  = spline[4],
         dy  = spline[5],
         i, j, ax, ay, px, qx, rx, sx, py, qy, ry, sy, t;
-
     for(i = 6; i !== spline.length; i += 2) {
       ax = bx;
       bx = cx;
@@ -63,7 +62,6 @@
       qx =        ax - 2.5 * bx + 2.0 * cx - 0.5 * dx;
       rx = -0.5 * ax            + 0.5 * cx           ;
       sx =                   bx                      ;
-
       ay = by;
       by = cy;
       cy = dy;
@@ -72,65 +70,49 @@
       qy =        ay - 2.5 * by + 2.0 * cy - 0.5 * dy;
       ry = -0.5 * ay            + 0.5 * cy           ;
       sy =                   by                      ;
-
       for(j = 0; j !== n; ++j) {
         t = j / n;
-
         polyline.push(
           ((px * t + qx) * t + rx) * t + sx,
           ((py * t + qy) * t + ry) * t + sy
         );
       }
     }
-
     polyline.push(
       px + qx + rx + sx,
       py + qy + ry + sy
     );
-
     return polyline;
   }
-
   function downsample(n, polyline) {
     var len = 0,
         i, dx, dy;
-
     for(i = 2; i !== polyline.length; i += 2) {
       dx = polyline[i    ] - polyline[i - 2];
       dy = polyline[i + 1] - polyline[i - 1];
       len += Math.sqrt(dx * dx + dy * dy);
     }
-
     len /= n;
-
     var small = [],
         target = len,
         min = 0,
         max, t;
-
     small.push(polyline[0], polyline[1]);
-
     for(i = 2; i !== polyline.length; i += 2) {
       dx = polyline[i    ] - polyline[i - 2];
       dy = polyline[i + 1] - polyline[i - 1];
       max = min + Math.sqrt(dx * dx + dy * dy);
-
       if(max > target) {
         t = (target - min) / (max - min);
-
         small.push(
           polyline[i - 2] + dx * t,
           polyline[i - 1] + dy * t
         );
-
         target += len;
       }
-
       min = max;
     }
-
     small.push(polyline[polyline.length - 2], polyline[polyline.length - 1]);
-
     return small;
   }
   */
@@ -724,6 +706,8 @@
 
   global.Skycons = Skycons;
 }(this));
+
+
 
 var icons = new Skycons(),
 		list  = [
