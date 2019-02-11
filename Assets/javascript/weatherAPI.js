@@ -12,6 +12,14 @@ $(document).on("click", ".result-shell", function(event) {
         var queryURL;
         var wxresults; 
         var wxdisplay = $("div");
+        var eventDate;  
+    
+        if (eventDate.diff(today, "days") <= 7) {
+            queryURL = URL + lat + "," + long;
+        }
+        else { /* Event date > 7 days away*/
+            queryURL = URL + lat + "," + long + "," + time;
+        }
     
         $.ajax({
             url: queryURL,
@@ -20,30 +28,19 @@ $(document).on("click", ".result-shell", function(event) {
             .then(function(response) {
                 wxresults = response.data;
                 console.log(wxresults);
-
-                var icon = $("canvas").attr("id", wxresults.daily.data[i].icon);
-                var date = moment(wxresults.daily.data[i].time, "x").format("dd/mm/yy");
-                var summary = wxresults.daily.data[i].summary;
-                var rain = wxresults.daily.data[i].precipProbability;
-                var high = wxresults.daily.data[i].temperatureHigh;
-                var low = wxresults.daily.data[i].temperatureLow;
-                var humid = wxresults.daily.data[i].humidity;
-                var wind = wxresults.daily.data[i].windSpeed;
-                var cloud = wxresults.daily.data[i].cloudCover;                   
-                
-                wxdisplay.append("<strong>" + date + "</strong><br>"
-                    + icon + " " + summary +
-                    "<br>High temperature: " + high +
-                    "\xB0F<br>Low temperature: " + low +
-                    "\xB0F<br>Rain: " + rain +
-                    "<br>Humidity: " + humid +
-                    "<br>Wind speed: " + wind +
-                    "mph<br>Cloud cover: " + cloud +
-                    "<br>");
-                
-                $("this").next("div").append(wxdisplay);
-                $("this").next("div").attr("class", "collapse-show");  // shows the div once it's populated with weather data
-                console.log("show weather");
+                for (var i=0; i<8; i++) {
+                    //var icon = wxresults.daily.data[i].icon; //
+                    var summary = wxresults.daily.data[i].summary;
+                    var rain = wxresults.daily.data[i].precipProbability;
+                    var high = wxresults.daily.data[i].temperatureHigh;
+                    var low = wxresults.daily.data[i].temperatureLow;
+                    var humid = wxresults.daily.data[i].humidity;
+                    var wind = wxresults.daily.data[i].windSpeed;
+                    var cloud = wxresults.daily.data[i].cloudCover;
+                    wxdisplay.append(summary + "<br>Rain: " + rain + "<br>High: " + high + "F<br>Low: " + low + "F<br>Humidity: " + humid + "<br>Wind speed: " + wind + "mph<br>Cloud cover: " + cloud + "<br>");
+                }
+                $("this").append(wxdisplay);
+                $("this").attr("class", "collapse-show");
             })
         }
 
@@ -51,5 +48,4 @@ $(document).on("click", ".result-shell", function(event) {
         $("this").next("div").attr("class", "collapse");
         console.log("hide weather");
     }
-}
 });

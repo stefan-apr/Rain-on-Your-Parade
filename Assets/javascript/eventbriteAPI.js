@@ -64,20 +64,23 @@ $(document).ready(function() {
     var categoryPiece = "";
     var startDatePiece = "";
     var endDatePiece = "";
+    var keywordPiece = "";
 
     var selectedStartDate = $("#start-event").val();
     var selectedEndDate = $("#end-event").val();
-   
- 
+    var selectedKeyword = $("#keyword").val();
+    
     if(selectedStartDate <= selectedEndDate) {
       var selectedCat = $('#event-type').val();
       // printing of user input to dom. **option:selected
       var selectedCatName = $('#event-type option:selected').text();
       var radius = $("#event-location-radius").val(); 
+      
 
-      console.log(selectedCat)
-      console.log(typeof selectedCat)
+      console.log(selectedCat);
+      console.log(typeof selectedCat);
       if(selectedCat !== '-1' && selectedCat !== null) {
+
         console.log('selectedCat is !== -1')
     // creating a temp obj to hold values. Yin
     var newObj = {
@@ -118,6 +121,8 @@ $(document).ready(function() {
       }
       if(parseInt(selectedCat) !== -1) {
 
+        console.log('selectedCat is !== -1');
+
         categoryPiece = "&categories=" + selectedCat;
       } else {
         console.log('selectedCat is === -1')
@@ -128,6 +133,9 @@ $(document).ready(function() {
       }
       if(selectedEndDate !== "" && selectedEndDate !== undefined) {
         endDatePiece = "&start_date.range_end=" + selectedEndDate + "T00:00:01Z";
+      }
+      if(selectedKeyword !== "" && selectedKeyword !== undefined) {
+        keywordPiece = "&q=" + selectedKeyword;
       }
 
       // creating a temp obj to hold values. 
@@ -156,6 +164,7 @@ $(document).ready(function() {
       var latitude = coordinates.lat; // Taken from placesAPI.js
       var longitude = coordinates.lng; // Taken from placesAPI.js
       if(latitude === undefined || longitude === undefined || selectedCat === undefined) {
+        enableButtons(0);
         return;
       }
     
@@ -163,11 +172,12 @@ $(document).ready(function() {
         latitude + "&location.within=" + radius + "mi" + categoryPiece + startDatePiece + endDatePiece + keywordPiece + "&sort_by=distance" + 
         "&expand=venue,ticket_availability,format" + "&token=" + auth;
 
-        console.log(queryURL)
+        console.log(queryURL);
 
       getEvents(queryURL);
 
     }
+    } 
 
     // The user entered a start date that's later than the end. Display an error message. 
     else {
@@ -175,6 +185,9 @@ $(document).ready(function() {
     }
   };
 }); 
+      enableButtons(0);
+    }
+  }); 
 
   // Set up results page switch function
   $("#page-sub").click(function() {
@@ -255,7 +268,8 @@ $(document).ready(function() {
       $("#btn-up-" + j).css("display", "none");
       $("#btn-down-" + j).css("display", "none");
     }
-    for(var i = (cur - 4); i < (cur + 5); i++) {
+
+    for(var i = (cur - 3); i < (cur + 4); i++) {
       $("#btn-up-" + i).css("display", "inline");
       $("#btn-down-" + i).css("display", "inline");
     }
