@@ -61,4 +61,24 @@ canvas { /* weather icons */
 
 .mapHidden {
     display: none;
+    width: 100%;
+}
+  
+h5{
+    text-align:center;
+}
+
+div.result-interior {
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+#no-results {
+    display: none;
+    color: darkred;
+}
+
+#req {
+    font-size: 9pt;
+    color: darkred;
 }
