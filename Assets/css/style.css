@@ -62,11 +62,14 @@ canvas { /* weather icons */
     width: 100%;
 }
 
-/* #results-frame{
+ #results-frame{
     margin: auto;
     margin-left:300px;
     margin-top:-300px;
-} */
+} 
+  
+
+}
 
 #results-buttons-up {
     height: 45px;
@@ -88,9 +91,9 @@ canvas { /* weather icons */
 #load {
     position: absolute;
     display: none;
-    height: 40px;
+    height: 45px;
     width: 5%;
-    right: 5%;
+    left: 5%;
     top: -0.1%;
 }
 
