@@ -2,7 +2,6 @@
 
 $(document).on("click", ".result-shell", function(event) {
     event.preventDefault();
-    console.log("clicked on event");
     var that = $(this); 
     
     if ($(this).children().hasClass("collapse")) {   // the .children() is the div that actually contains weather data, starts out collapsed by default
@@ -21,12 +20,12 @@ $(document).on("click", ".result-shell", function(event) {
         })
             .then(function(response) {
                 wxresults = response.daily.data[0];
-                console.log(wxresults);
 
                 var wxdisplay = $("<div/>");
                 var icon = wxresults.icon;
                 var summary = wxresults.summary;
-                var rain = wxresults.precipProbability;
+                var precipProb = wxresults.precipProbability;
+                var precipType = wxresults.precipType;
                 var high = wxresults.temperatureHigh;
                 var low = wxresults.temperatureLow;
                 var humid = wxresults.humidity;
@@ -36,13 +35,26 @@ $(document).on("click", ".result-shell", function(event) {
                 wxdisplay.append("<canvas id='" + icon + "' height='64' width='64'></canvas> " + summary +
                     "<br>High temperature: " + high +
                     "\xB0F<br>Low temperature: " + low +
-                    "\xB0F<br>Rain: " + rain +
+                    "\xB0F<br>Probability of precipitation: " + precipProb +
+                    "<br>Type of precipication: " + precipType +
                     "<br>Humidity: " + humid +
                     "<br>Wind speed: " + wind +
                     "mph<br>Cloud cover: " + cloud +
                     "<br>");
                 
                 that.children(".result-interior").html(wxdisplay);
+
+                var icons = new Skycons(),
+                list  = [
+                    "clear-day", "clear-night", "partly-cloudy-day",
+                    "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+                    "fog"
+                ],
+                i;
+                for(i = list.length; i--; )
+                    icons.set(list[i], list[i]);
+                icons.play();
+                
             })
             $(this).children().removeClass("collapse").addClass("collapse-show");  // shows the div once it's populated with weather data
             
