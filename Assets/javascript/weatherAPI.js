@@ -10,6 +10,8 @@ $(document).on("click", ".result-shell", function(event) {
         var lat = $(this).attr("data-latitude"); // pulled from eventbrite API
         var long = $(this).attr("data-longitude");// pulled from eventbrite API
         var eventDate = moment($(this).attr("data-start")).format("X"); // pulled from eventbrite API, convert to UNIX format
+        var eventMoment = moment($(this).attr("data-start"));
+        var now = new moment();
         var wxresults; 
         var proxy = "https://cors-anywhere.herokuapp.com/";
         var queryURL = "https://api.darksky.net/forecast/e3bf810172b3fa7c6960cc8b6769743c/" + lat + "," + long + "," + eventDate;
@@ -41,6 +43,10 @@ $(document).on("click", ".result-shell", function(event) {
                     "<br>Wind speed: " + wind +
                     "mph<br>Cloud cover: " + cloud +
                     "<br>");
+
+                if (eventMoment.diff(now, "days") > 7) {
+                    wxdisplay.prepend("<p style='color:red;'>This event is more than a week away, so this is historical weather data:</p>");
+                }
                 
                 that.children(".result-interior").html(wxdisplay);
 
@@ -54,7 +60,7 @@ $(document).on("click", ".result-shell", function(event) {
                 for(i = list.length; i--; )
                     icons.set(list[i], list[i]);
                 icons.play();
-                
+
             })
             $(this).children().removeClass("collapse").addClass("collapse-show");  // shows the div once it's populated with weather data
             
