@@ -43,7 +43,7 @@ $("#results-page").on("click", ".result-shell", function(event) {
                     "mph<br>Cloud cover: " + cloud +
                     "<br>");
                 
-                that.children().hasClass("result-interior").append(wxdisplay);
+                that.chilren().hasClass("result-interior").append(wxdisplay);
             })
             that.children().removeClass("collapse").addClass("collapse-show");  // shows the div once it's populated with weather data
             
