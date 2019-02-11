@@ -41,6 +41,9 @@ canvas { /* weather icons */
     margin-top: 8px;
 }
 
+.predictionButtons {
+  
+}
 
 .predictionButtons:hover {
     cursor: pointer;
@@ -59,7 +62,40 @@ canvas { /* weather icons */
     width: 100%;
 }
 
-.mapHidden {
+/* #results-frame{
+    margin: auto;
+    margin-left:300px;
+    margin-top:-300px;
+} */
+
+#results-buttons-up {
+    height: 45px;
+    width: 100%;
+    float: left;
+}
+
+#results-buttons-down {
+    height: 45px;
+    width: 100%;
+    float: left;
+}
+
+#results-page {
+    float: left;
+    width: 100%;
+}
+
+#load {
+    position: absolute;
+    display: none;
+    height: 40px;
+    width: 5%;
+    right: 5%;
+    top: -0.1%;
+}
+
+#page-search {
+    margin-bottom: 1%;
     display: none;
     width: 100%;
 }
@@ -81,4 +117,9 @@ div.result-interior {
 #req {
     font-size: 9pt;
     color: darkred;
+}
+
+.mapHidden {
+    display: none;
+    width: 100%;
 }
