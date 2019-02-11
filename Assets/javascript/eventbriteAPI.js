@@ -81,12 +81,8 @@ $(document).ready(function() {
 
   // OAuth Token. (This should probably be encrypted but it's OK for now)
   var auth = "FGSMQANMR2CUSP7RFDDL";
-  // URL to get a list of all events Eventbrite has. (For debug purposes. Not currently in use.)
-  var allEventURL = "https://www.eventbriteapi.com/v3/events/search/?token=" + auth;
   // URL to get a list of all categories Eventbrite has.
   var catURL = "https://www.eventbriteapi.com/v3/categories/?token=" + auth;
-  // URL to get a list of all subcategories Eventbrite has. (For debug purposes. Not currently in use.)
-  var subcatURL = "https://www.eventbriteapi.com/v3/subcategories/?token=" + auth;
   // The URL to be queried. Modified as necessary.
   var queryURL = "";
   // Used in generating results page buttons
@@ -97,8 +93,6 @@ $(document).ready(function() {
   var numButtons = 0;
   // Array of Lat Lng of events on the current page
   var map;
-
-  
 
   // Get list of Eventbrite categories and append them to #event-type dropdown
   $.ajax({
@@ -118,18 +112,6 @@ $(document).ready(function() {
       $("#event-type").append(newOption); 
     }
   });
-
-  /*
-  // Get list of Eventbrite subcategories (Not currently in use. Might implement somehow later.)
-  $.ajax({
-    url: subcatURL,
-    method: "GET"
-  })
-  .then(function(response) {
-    console.log("Subcategories: ");
-    console.log(response);
-  });
-  */
 
   $("#submit").click(function() {
     $("#no-results").css("display", "none");
@@ -296,7 +278,7 @@ $(document).ready(function() {
 
         geocodeAddress(thisAddress, geocoder, map);
 
-        var newInside = $("<div id='" + i + "-inner' class='result-interior collapse'>" + "This is an inner result" + "</div>");
+        var newInside = $("<div id='" + i + "-inner' class='result-interior collapse'></div>");
         var linebreak = $("<br>");
         
         $("#results-page").append(newShell);
@@ -304,16 +286,6 @@ $(document).ready(function() {
         $("#results-page").append(linebreak);
         enableButtons(numButtons);
       }
-
-
-
-      // Recursive query for displaying all items on one page together.
-      /*
-      if(response.pagination.has_more_items) {
-        var nextPage = response.pagination.page_number + 1
-        getEvents(queryURL +  "&page=" + nextPage);
-      }
-      */
     });
   }
 
@@ -394,4 +366,3 @@ $(document).ready(function() {
    $('#results-table > tbody').append(newRow);
    });
 });
-
