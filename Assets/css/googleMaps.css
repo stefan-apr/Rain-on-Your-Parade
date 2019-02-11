@@ -5,10 +5,10 @@
        * element that contains the map. */
       #map {
         height:350px;
-        width:auto;
-        /* float:left;
-        overflow:clear; */
-        /* position: relative; */
+        width:100%;
+        /* float:left; */
+        overflow:clear;
+        position: relative;
         margin: 0 auto;
         /* margin-top: -500px;
         margin-left:300px;  */
@@ -108,7 +108,7 @@
         }
       #map.active {
             height:350px;
-            width:50%;
+            width:100%;
             float:left;
             overflow:clear;
             position: relative;
