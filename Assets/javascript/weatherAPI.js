@@ -2,8 +2,8 @@
 
 $("#results-page").on("click", ".result-shell", function(event) {
     event.preventDefault();
-    console.log("click on event");
-    var that = $(this); //there's an issue somewhere with $(this)
+    console.log("clicked on event");
+    var that = $(this);
     
     if (that.children().hasClass("collapse")) {   // the .children() is the div that actually contains weather data, starts out collapsed by default
         console.log("show weather");

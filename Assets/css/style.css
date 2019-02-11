@@ -3,7 +3,10 @@ div.jumbotron {
     background-size: cover;
     padding: 2em;
     color: white;
-    text-shadow: 2px 2px 4px black;
+    text-shadow: 2px 2px 10px black,
+        -2px -2px 10px black,
+        -2px 2px 10px black,
+        2px -2px 10px black;
     color: whitesmoke;
 }
 
