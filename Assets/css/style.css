@@ -3,17 +3,24 @@ div.jumbotron {
     background-size: cover;
     padding: 2em;
     color: white;
-    text-shadow: 2px 2px 4px black;
-    color: darkgree
+    text-shadow: 2px 2px 10px black,
+        -2px -2px 10px black,
+        -2px 2px 10px black,
+        2px -2px 10px black;
+    color: whitesmoke;
 }
 
-div.collapse {
+.collapse {
     display: none;
 }
 
 
-div.collapse-show {
+.collapse-show {
     display: block;
+}
+
+.result-shell {
+    cursor: pointer;
 }
 
 footer {
@@ -34,7 +41,13 @@ canvas { /* weather icons */
     margin-top: 8px;
 }
 
+<<<<<<< HEAD
 
+=======
+.predictionButtons {
+  
+}
+>>>>>>> aef6d24bcf6f75a7ab54dd508e5a6b6f4db7d920
 
 .predictionButtons:hover {
     cursor: pointer;
@@ -51,8 +64,50 @@ canvas { /* weather icons */
 
 #keyword {
     width: 100%;
+<<<<<<< HEAD
+=======
+}
+
+/* #results-frame{
+    margin: auto;
+    margin-left:300px;
+    margin-top:-300px;
+} */
+
+#results-buttons-up {
+    height: 45px;
+    width: 100%;
+    float: left;
+}
+
+#results-buttons-down {
+    height: 45px;
+    width: 100%;
+    float: left;
+>>>>>>> aef6d24bcf6f75a7ab54dd508e5a6b6f4db7d920
 }
 
 .mapHidden {
     display: none;
+<<<<<<< HEAD
+=======
+    height: 40px;
+    width: 5%;
+    right: 5%;
+    top: -0.1%;
+}
+
+#page-search {
+    margin-bottom: 1%;
+    display: none;
+}
+  
+h5{
+    text-align:center;
+}
+
+div.result-interior {
+    font-size: 0.8em;
+    font-style: italic;
+>>>>>>> aef6d24bcf6f75a7ab54dd508e5a6b6f4db7d920
 }

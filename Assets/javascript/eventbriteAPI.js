@@ -107,8 +107,7 @@ $(document).ready(function() {
   */
 
   $("#submit").click(function() {
-
-    $("#submit").attr("disabled", "disabled");
+    disableButtons(0);
     initialQuery = true;
     $("#results-buttons-up").empty();
     $("#results-buttons-down").empty();
@@ -130,21 +129,43 @@ $(document).ready(function() {
     
     if(selectedStartDate <= selectedEndDate) {
       var selectedCat = $('#event-type').val();
-      // printing of user input to dom. **option:selected
       var selectedCatName = $('#event-type option:selected').text();
-      var radius = $("#event-location-radius").val(); 
-      
+      var radius = $("#event-location-radius").val();
+      $("#initial-text").css("display", "none");
 
-      console.log(selectedCat);
-      console.log(typeof selectedCat);
-      if(selectedCat !== '-1' && selectedCat !== null) {
-        console.log('selectedCat is !== -1');
-
-        categoryPiece = "&categories=" + selectedCat;
-      } else {
-        console.log('selectedCat is === -1')
-        console.log(categoryPiece);
+      if(selectedCat === null) {
+        return;
       }
+
+      // creating a temp obj to hold values. Yin
+      var newObj = {
+          category: categoryPiece,
+          categoryName:selectedCatName,
+          startDate: selectedStartDate,
+          endDate: selectedEndDate,
+          radius: radius
+      };
+
+    // push values from the temp newobj to fb.  
+    
+      var database = firebase.database();
+      database.ref().push(newObj);
+      console.log(newObj);
+      console.log(newObj.startDate);
+      console.log(newObj.endDate);
+
+
+      var latitude = coordinates.lat; // Taken from placesAPI.js
+      var longitude = coordinates.lng; // Taken from placesAPI.js
+      if(latitude === undefined || longitude === undefined || selectedCat === undefined || radius === undefined) {
+        console.log("Vital field not filled");
+        enableButtons(0);
+        return;
+      }
+      
+      if(parseInt(selectedCat) !== -1) {
+        categoryPiece = "&categories=" + selectedCat;
+      } 
       if(selectedStartDate !== "" && selectedStartDate !== undefined) {
         startDatePiece = "&start_date.range_start=" + selectedStartDate + "T00:00:01Z";
       }
@@ -153,36 +174,6 @@ $(document).ready(function() {
       }
       if(selectedKeyword !== "" && selectedKeyword !== undefined) {
         keywordPiece = "&q=" + selectedKeyword;
-      }
-
-      // creating a temp obj to hold values. 
-      var newObj = {
-          category: categoryPiece,
-          // added this for the new prop just added
-          categoryName: selectedCatName,
-          startDate: selectedStartDate,
-          endDate: selectedEndDate,
-          radius: radius
-      };
-
-      // push values from the temp newobj to fb.  
-      
-      var database = firebase.database();
-      database.ref().push(newObj);
-        console.log(newObj);
-        console.log(newObj.startDate);
-        console.log(newObj.endDate);
-      
-      // clearing the input boxes.
-      // $("#start-event").val("");
-      // $("#end-event").val("");
-      // $("#event-type").val("");
-
-      var latitude = coordinates.lat; // Taken from placesAPI.js
-      var longitude = coordinates.lng; // Taken from placesAPI.js
-      if(latitude === undefined || longitude === undefined || selectedCat === undefined) {
-        enableButtons(0);
-        return;
       }
     
       queryURL = "https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
@@ -197,7 +188,6 @@ $(document).ready(function() {
     // The user entered a start date that's later than the end. Display an error message. 
     else {
       console.log("Invalid date entry: Start date later than end date");
-      enableButtons(0);
     }
   }); 
 
@@ -272,6 +262,7 @@ $(document).ready(function() {
         $("#results-page").append(linebreak);
         enableButtons(numButtons);
       }
+<<<<<<< HEAD
 
 
 
@@ -282,6 +273,8 @@ $(document).ready(function() {
         getEvents(queryURL +  "&page=" + nextPage);
       }
       */
+=======
+>>>>>>> aef6d24bcf6f75a7ab54dd508e5a6b6f4db7d920
     });
   }
 
@@ -292,6 +285,7 @@ $(document).ready(function() {
       $("#btn-up-" + j).css("display", "none");
       $("#btn-down-" + j).css("display", "none");
     }
+
     for(var i = (cur - 3); i < (cur + 4); i++) {
       $("#btn-up-" + i).css("display", "inline");
       $("#btn-down-" + i).css("display", "inline");

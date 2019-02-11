@@ -4,23 +4,18 @@
   <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Raining on your parade</title>
+        <title>Rain on your parade</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="Assets/css/reset.css">
-        <!-- <link rel="stylesheet" type="text/css" href="Assets/css/reset.css"> dup?-->
-        <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
-        
-        <!-- GOOGLE MAPS -->
-        <link rel="stylesheet" type="text/css" href="Assets/css/googleMaps.css">
-
-
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="Assets/css/style.css">
+        <link rel="stylesheet" type="text/css" href="Assets/css/googleMaps.css">
     </head>
 
     <body>
         <div class="jumbotron jumbotron-fluid text-center">
             <div class="container">
-                <h2 class="display-2">Raining on your parade</h2>
+                <h2 class="display-2">Rain on your parade</h2>
                 <h3>(Or not, hopefully)</h3>
             </div>
         </div>
@@ -43,7 +38,7 @@
 
                                 <form>
                                     <div class="autoComplete">
-                                        <input id="locationInput" type="text" name="location" placeholder="City">
+                                        <input id="locationInput" type="text" name="location" placeholder="City, State">
                                     </div>
                                     
                                 </form>
@@ -69,7 +64,7 @@
                                 <input type="date" id="start-event" name="date" min="" max=""><br>
                                 <label for="end-event" class="form-label">End date</label><br>
                                 <input type="date" id="end-event" name="date" min="" max="">
-                                <!--Find a way to make the second date the same or later as the first date-->
+                                <!--Find a way to make the second date the same or later as the first date?-->
                                  <br><br>
                             </form>
                             <button class="btn btn-sm btn-dark updateMap newSearch" id="submit">Submit</button>
@@ -77,11 +72,28 @@
                     </div>
                 </div>
               
-                <div class="col-6" id="centerpiece">
-                    <div class="text">
-                    <h4>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</h4>
-                    <!-- <p>Other interesting text here blahblahblah</p> -->
+                <div class="col-6" id="results-frame">
+                    <div class="text" id="initial-text">
+                        <h4>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</h4>
+                        <!-- <p>Other interesting text here blahblahblah</p> -->
+                        <br><br>
                     </div>
+
+                    <div id="map"></div>
+
+                    <div id="results-buttons-up"></div>
+
+                    <img src="Assets/images/load.gif" id="load" alt="Loading...">
+
+                    <div id="page-search">
+                        <input type="text" id="go-to-page">
+                        <button id="page-sub">Pick Page</button>
+                    </div>
+
+                    <div id="results-page"></div>
+
+                    <div id="results-buttons-down"></div>
+
                 </div>
 
                 <div class="col-3" id="pop-searches">
@@ -99,48 +111,30 @@
                         </div>
 
                     </div> 
+<<<<<<< HEAD
                  </div>
          
                 <!------------------GOOGLE MAPS------------>
                 <div  id="map"></div>
-
-
-                <div class="col-6" id="results-frame">
-                    <div id="results-buttons-up"></div>
-                    <img src="Assets/images/load.gif" id="load" alt="Loading..."><br>
-                    <div id="page-search">
-                        <input type="text" id="go-to-page">
-                        <button id="page-sub">Pick Page</button><br>
-                    </div>
-                    <div id="results-page"></div><br>
-                    <div id="results-buttons-down"></div>
-                </div>
-            </div>
+=======
+                 </div>             
+>>>>>>> aef6d24bcf6f75a7ab54dd508e5a6b6f4db7d920
 
             </div>
-    
-          </div>
-    
+
         </div>
 
-      </div>
-    
-    </div>
- 
-
-
         <footer class="footer"></footer>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
-
         <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
         <script src="Assets/javascript/placesAPI.js"></script>
         <script src="Assets/javascript/eventbriteAPI.js"></script>
         <script src="Assets/javascript/skycons.js"></script> <!-- weather icons for weather API -->
         <script src="Assets/javascript/weatherAPI.js"></script>
         <script src="Assets/javascript/googleMaps.js"></script>
+<<<<<<< HEAD
         <script src="Assets/javascript/firebase.js"></script> 
         <script src="Assets/javascript/mapsAPI.js"></script>
     
@@ -152,10 +146,10 @@
 
         <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTlO4pKr4aLLI2sA2Z8MwU7C5pRcu9ExY&libraries=places&callback=initAutocomplete"async defer></script> -->
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTlO4pKr4aLLI2sA2Z8MwU7C5pRcu9ExY&callback=initMap"></script>
+=======
+        <script src="Assets/javascript/firebase.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTlO4pKr4aLLI2sA2Z8MwU7C5pRcu9ExY&libraries=places&callback=initAutocomplete" async defer></script>
+>>>>>>> aef6d24bcf6f75a7ab54dd508e5a6b6f4db7d920
         
   </body>
 </html>
-        
-
-
-
