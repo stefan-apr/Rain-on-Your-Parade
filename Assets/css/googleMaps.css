@@ -113,8 +113,8 @@
             overflow:clear;
             position: relative;
             margin: 0 auto;
-            margin-top: -680px;
-            margin-left:280px;
+            /* margin-top: -680px;
+            margin-left:280px; */
           }
       #pop-searches{
             padding-left:30px;

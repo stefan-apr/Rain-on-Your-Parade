@@ -3,14 +3,14 @@
 $(document).on("click", ".result-shell", function(event) {
     event.preventDefault();
     console.log("clicked on event");
-    var that = $(this);
+    // var that = $(this); 
     
-    if (that.children().hasClass("collapse")) {   // the .children() is the div that actually contains weather data, starts out collapsed by default
+    if ($(this).children().hasClass("collapse")) {   // the .children() is the div that actually contains weather data, starts out collapsed by default
         console.log("show weather");
 
-        var lat = that.attr("data-latitude"); // pulled from eventbrite API
-        var long = that.attr("data-longitude");// pulled from eventbrite API
-        var eventDate = moment(that.attr("data-start")).format("X"); // pulled from eventbrite API, convert to UNIX format
+        var lat = $(this).attr("data-latitude"); // pulled from eventbrite API
+        var long = $(this).attr("data-longitude");// pulled from eventbrite API
+        var eventDate = moment($(this).attr("data-start")).format("X"); // pulled from eventbrite API, convert to UNIX format
         var wxresults; 
         var proxy = "https://cors-anywhere.herokuapp.com/";
         var queryURL = "https://api.darksky.net/forecast/e3bf810172b3fa7c6960cc8b6769743c/" + lat + "," + long + "," + eventDate;
@@ -43,15 +43,15 @@ $(document).on("click", ".result-shell", function(event) {
                     "mph<br>Cloud cover: " + cloud +
                     "<br>");
                 
-                that.chilren().hasClass("result-interior").append(wxdisplay);
+                $(this).children().html(wxdisplay);
             })
-            that.children().removeClass("collapse").addClass("collapse-show");  // shows the div once it's populated with weather data
+            $(this).children().removeClass("collapse").addClass("collapse-show");  // shows the div once it's populated with weather data
             
         }
 
-    else if (that.children().hasClass("collapse-show")) {  // collapse div if it's already showing
-        that.children().removeClass("collapse-show").addClass("collapse");
-        that.children().empty(); //clears the div
+    else if ($(this).children().hasClass("collapse-show")) {  // collapse div if it's already showing
+        $(this).children().removeClass("collapse-show").addClass("collapse");
+        $(this).children().empty(); //clears the div
         console.log("hide weather");
     }
     else {
