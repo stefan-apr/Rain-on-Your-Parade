@@ -1,5 +1,6 @@
 var map;
 var geocoder;
+var markers = [];
 
 //initialize google map, called back from <script>
 function initMap() {
@@ -39,12 +40,13 @@ function changeMapCenter(centerLatLng, targetMap){
 function geocodeAddress(Localaddress, geocoder, resultsMap) {
   geocoder.geocode({'address': Localaddress}, function(results, status) {
     if (status === 'OK') {
-      console.log("new marker")
-      console.log(results);
+      //console.log("new marker")
+      //console.log(results);
       var marker = new google.maps.Marker({
         map: resultsMap,
         position: results[0].geometry.location
       });
+      markers.push(marker);
       marker.setMap(map);
     } else {
       //alert('Geocode was not successful for the following reason: ' + status);
@@ -52,7 +54,24 @@ function geocodeAddress(Localaddress, geocoder, resultsMap) {
   });
 }
 
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  console.log("deleting markers")
+  setMapOnAll(null); 
+  markers = [];
+} 
+
+
+
 $(".updateMap").on("click", function(){
+  clearMarkers()
   $("#map").removeClass('mapHidden');
   //$("#map").attr('class', 'mapDisplayed')
   console.log("oooooooverrrr")
@@ -225,9 +244,9 @@ $(document).ready(function() {
         // Make results buttons if this is the first search with these terms.
         for(var i = 1; i <= response.pagination.page_count; i++) {
           var newButtonUp = $("<button value='" + i + "' class='btn btn-dark' id='btn-up-" + i +"'>" + i + "</button>");
-          newButtonUp.attr('class', 'updataMap');
+          newButtonUp.attr('class', 'updateMap');
           var newButtonDown = $("<button value='" + i + "' class='btn btn-dark' id='btn-down-" + i + "'>" + i + "</button>");  
-          newButtonDown.attr('class', 'updataMap');
+          newButtonDown.attr('class', 'updateMap');
           newButtonDown.css("margin-right", "2px");
           newButtonUp.css("margin-right", "2px");       
           $("#results-buttons-up").append(newButtonUp);
@@ -243,6 +262,14 @@ $(document).ready(function() {
             shiftButtons($(this).attr("value"), response.pagination.page_count);
           });
         }
+       
+        $(".updateMap").on("click", function(){
+          clearMarkers()
+          $("#map").removeClass('mapHidden');
+          //$("#map").attr('class', 'mapDisplayed')
+          console.log("oooooooverrrr")
+        })
+        
         numButtons = response.pagination.page_count;
         shiftButtons(1, numButtons);
         $("#page-search").css("display", "block");
@@ -255,8 +282,8 @@ $(document).ready(function() {
           "'>" + response.events[i].name.text + "</div>");
 
         var thisAddress = response.events[i].venue.address.localized_address_display;
-        console.log("this latlng=");
-        console.log(thisAddress);
+        //console.log("this latlng=");
+        //console.log(thisAddress);
 
         geocodeAddress(thisAddress, geocoder, map);
 
@@ -355,3 +382,4 @@ $(document).ready(function() {
    $('#results-table > tbody').append(newRow);
    });
 });
+
