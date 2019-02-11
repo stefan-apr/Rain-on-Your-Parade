@@ -38,7 +38,7 @@
 
                                 <form>
                                     <div class="autoComplete">
-                                        <input id="locationInput" type="text" name="location" placeholder="City">
+                                        <input id="locationInput" type="text" name="location" placeholder="City, State">
                                     </div>
                                     
                                 </form>
@@ -64,7 +64,7 @@
                                 <input type="date" id="start-event" name="date" min="" max=""><br>
                                 <label for="end-event" class="form-label">End date</label><br>
                                 <input type="date" id="end-event" name="date" min="" max="">
-                                <!--Find a way to make the second date the same or later as the first date-->
+                                <!--Find a way to make the second date the same or later as the first date?-->
                                  <br><br>
                             </form>
                             <button class="btn btn-sm btn-dark" id="submit">Submit</button>
@@ -72,11 +72,27 @@
                     </div>
                 </div>
               
-                <div class="col-6" id="centerpiece">
+                <div class="col-6" id="results-frame">
                     <div class="text">
-                    <h4>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</h4>
-                    <!-- <p>Other interesting text here blahblahblah</p> -->
+                        <h4>Tell us what event you're attending, and we'll tell you whether you should pack an umbrella and boots, or shades and sunscreen!</h4>
+                        <!-- <p>Other interesting text here blahblahblah</p> -->
                     </div>
+
+                    <div id="map"></div>
+
+                    <div id="results-buttons-up"></div>
+
+                    <img src="Assets/images/load.gif" id="load" alt="Loading...">
+
+                    <div id="page-search">
+                        <input type="text" id="go-to-page">
+                        <button id="page-sub">Pick Page</button>
+                    </div>
+
+                    <div id="results-page"></div>
+
+                    <div id="results-buttons-down"></div>
+
                 </div>
 
                 <div class="col-3" id="pop-searches">
@@ -94,36 +110,11 @@
                         </div>
 
                     </div> 
-                 </div>
-         
-                <!------------------GOOGLE MAPS------------>
-                
-                <div id="map"></div>
-
-
-                <div class="col-6" id="results-frame">
-                    <div id="results-buttons-up"></div>
-                    <img src="Assets/images/load.gif" id="load" alt="Loading..."><br>
-                    <div id="page-search">
-                        <input type="text" id="go-to-page">
-                        <button id="page-sub">Pick Page</button><br>
-                    </div>
-                    <div id="results-page"></div><br>
-                    <div id="results-buttons-down"></div>
-                </div>
-            </div>
+                 </div>             
 
             </div>
-    
-          </div>
-    
+
         </div>
-
-      </div>
-    
-    </div>
- 
-
 
         <footer class="footer"></footer>
 

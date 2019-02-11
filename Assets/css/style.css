@@ -55,11 +55,11 @@ canvas { /* weather icons */
     width: 100%;
 }
 
-#results-frame{
+/* #results-frame{
     margin: auto;
     margin-left:300px;
     margin-top:-300px;
-}
+} */
 
 #results-buttons-up {
     height: 45px;
@@ -94,4 +94,9 @@ canvas { /* weather icons */
   
 h5{
     text-align:center;
+}
+
+div.result-interior {
+    font-size: 0.8em;
+    font-style: italic;
 }
