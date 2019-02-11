@@ -1,3 +1,82 @@
+var map;
+var geocoder;
+var markers = [];
+
+//initialize google map, called back from <script>
+function initMap() {
+  var myLatLng = {lat: 47.606, lng: -122.332};
+
+  map = new google.maps.Map(document.getElementById('map'), {
+  zoom: 10,
+  center: myLatLng
+  });
+
+  geocoder = new google.maps.Geocoder();
+
+  //upon submit or pagenumber buttons are clicked, update map with new markers
+  $(document).on("click", ".updateMap", function(){
+    
+    $("#map").removeClass('mapHidden');
+    $("#map").attr('class', 'mapDisplayed')
+    //console.log("mapUpdated")
+    //geocodeAddress(geocoder, map);
+  })
+
+  //call changeMapCenter when submit is clicked
+  /* $(document).on("click", ".newSearch", function(){
+    changeMapCenter()
+  })
+   */
+  console.log("map generated")
+
+}
+
+//take LatLong and make targetMap centered at them
+function changeMapCenter(centerLatLng, targetMap){
+  targetMap.setCenter(centerLatLng);
+}
+
+// take localaddress, create a marker and put it on resultsMap
+function geocodeAddress(Localaddress, geocoder, resultsMap) {
+  geocoder.geocode({'address': Localaddress}, function(results, status) {
+    if (status === 'OK') {
+      //console.log("new marker")
+      //console.log(results);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+      markers.push(marker);
+      marker.setMap(map);
+    } else {
+      //alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  console.log("deleting markers")
+  setMapOnAll(null); 
+  markers = [];
+} 
+
+
+
+$(".updateMap").on("click", function(){
+  clearMarkers()
+  $("#map").removeClass('mapHidden');
+  //$("#map").attr('class', 'mapDisplayed')
+  console.log("oooooooverrrr")
+})
+
 $(document).ready(function() {
 
   // OAuth Token. (This should probably be encrypted but it's OK for now)
@@ -16,6 +95,10 @@ $(document).ready(function() {
   var currentPage = 1;
   // Total number of page buttons. Used in page navigation.
   var numButtons = 0;
+  // Array of Lat Lng of events on the current page
+  var map;
+
+  
 
   // Get list of Eventbrite categories and append them to #event-type dropdown
   $.ajax({
@@ -170,7 +253,9 @@ $(document).ready(function() {
         // Make results buttons if this is the first search with these terms.
         for(var i = 1; i <= response.pagination.page_count; i++) {
           var newButtonUp = $("<button value='" + i + "' class='btn btn-dark' id='btn-up-" + i +"'>" + i + "</button>");
+          newButtonUp.attr('class', 'updateMap');
           var newButtonDown = $("<button value='" + i + "' class='btn btn-dark' id='btn-down-" + i + "'>" + i + "</button>");  
+          newButtonDown.attr('class', 'updateMap');
           newButtonDown.css("margin-right", "2px");
           newButtonUp.css("margin-right", "2px");       
           $("#results-buttons-up").append(newButtonUp);
@@ -186,16 +271,32 @@ $(document).ready(function() {
             shiftButtons($(this).attr("value"), response.pagination.page_count);
           });
         }
+       
+        $(".updateMap").on("click", function(){
+          clearMarkers()
+          $("#map").removeClass('mapHidden');
+          //$("#map").attr('class', 'mapDisplayed')
+          console.log("oooooooverrrr")
+        })
+        
         numButtons = response.pagination.page_count;
         shiftButtons(1, numButtons);
         $("#page-search").css("display", "block");
       }
       for(var i = 0; i < response.events.length; i++) {
+        
         var newShell = $("<div id='" + i + "-outer' class='result-shell' data-name='" + response.events[i].name.text + 
           "' data-longitude='" + response.events[i].venue.longitude + "' data-latitude='" + response.events[i].venue.latitude + 
           "' data-start='" + response.events[i].start.local + "' data-address='" + response.events[i].venue.address.localized_address_display + 
           "'>" + response.events[i].name.text + "</div>");
-        var newInside = $("<div id='" + i + "-inner' class='result-interior collapse'></div>");
+
+        var thisAddress = response.events[i].venue.address.localized_address_display;
+        //console.log("this latlng=");
+        //console.log(thisAddress);
+
+        geocodeAddress(thisAddress, geocoder, map);
+
+        var newInside = $("<div id='" + i + "-inner' class='result-interior collapse'>" + "This is an inner result" + "</div>");
         var linebreak = $("<br>");
         
         $("#results-page").append(newShell);
@@ -203,6 +304,16 @@ $(document).ready(function() {
         $("#results-page").append(linebreak);
         enableButtons(numButtons);
       }
+
+
+
+      // Recursive query for displaying all items on one page together.
+      /*
+      if(response.pagination.has_more_items) {
+        var nextPage = response.pagination.page_number + 1
+        getEvents(queryURL +  "&page=" + nextPage);
+      }
+      */
     });
   }
 
@@ -283,3 +394,4 @@ $(document).ready(function() {
    $('#results-table > tbody').append(newRow);
    });
 });
+

@@ -118,3 +118,8 @@ div.result-interior {
     font-size: 9pt;
     color: darkred;
 }
+
+.mapHidden {
+    display: none;
+    width: 100%;
+}
