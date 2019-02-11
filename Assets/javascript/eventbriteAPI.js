@@ -1,6 +1,7 @@
 var map;
 var geocoder;
 var markers = [];
+var cityLocation;
 
 //initialize google map, called back from <script>
 function initMap() {
@@ -37,14 +38,25 @@ function changeMapCenter(centerLatLng, targetMap){
 }
 
 // take localaddress, create a marker and put it on resultsMap
-function geocodeAddress(Localaddress, geocoder, resultsMap) {
+function geocodeAddress(Localaddress, geocoder, resultsMap, divID, markerName) {
   geocoder.geocode({'address': Localaddress}, function(results, status) {
     if (status === 'OK') {
       //console.log("new marker")
       //console.log(results);
       var marker = new google.maps.Marker({
         map: resultsMap,
-        position: results[0].geometry.location
+        position: results[0].geometry.location,
+        title: markerName,
+        url : '#' + divID
+      });
+      marker.addListener('click', function(e) {
+        map.setCenter(marker.getPosition());
+        //console.log(marker.label);
+        var autoScrollDes = $(marker.url).offset().top;
+        $('html, body').animate({
+          scrollTop: autoScrollDes
+        }, 500, 'linear');
+
       });
       markers.push(marker);
       marker.setMap(map);
@@ -68,7 +80,17 @@ function clearMarkers() {
   markers = [];
 } 
 
-
+//set center to the searched city
+$(".newSearch").on("click", function(){
+  cityLocation = $("#locationInput").val()
+  geocoder.geocode({'address': cityLocation}, function(results, status) {
+    if (status === 'OK') {
+      map.setCenter(results[0].geometry.location);
+    } else {
+      //alert('Geocode was not successful for the following reason: ' + status);
+    }
+  })
+})
 
 $(".updateMap").on("click", function(){
   clearMarkers()
@@ -293,8 +315,9 @@ $(document).ready(function() {
         var thisAddress = response.events[i].venue.address.localized_address_display;
         //console.log("this latlng=");
         //console.log(thisAddress);
-
-        geocodeAddress(thisAddress, geocoder, map);
+        var thisID = newShell.attr('id');
+        var thisEventName = newShell.attr('data-name');
+        geocodeAddress(thisAddress, geocoder, map, thisID, thisEventName);
 
         var newInside = $("<div id='" + i + "-inner' class='result-interior collapse'>" + "This is an inner result" + "</div>");
         var linebreak = $("<br>");
