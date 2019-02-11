@@ -3,7 +3,7 @@
 $(document).on("click", ".result-shell", function(event) {
     event.preventDefault();
     console.log("clicked on event");
-    // var that = $(this); 
+    var that = $(this); 
     
     if ($(this).children().hasClass("collapse")) {   // the .children() is the div that actually contains weather data, starts out collapsed by default
         console.log("show weather");
@@ -22,9 +22,8 @@ $(document).on("click", ".result-shell", function(event) {
             .then(function(response) {
                 wxresults = response.daily.data[0];
                 console.log(wxresults);
-                console.log(queryURL);
 
-                var wxdisplay = $("div");
+                var wxdisplay = $("<div/>");
                 var icon = wxresults.icon;
                 var summary = wxresults.summary;
                 var rain = wxresults.precipProbability;
@@ -43,7 +42,7 @@ $(document).on("click", ".result-shell", function(event) {
                     "mph<br>Cloud cover: " + cloud +
                     "<br>");
                 
-                $(this).children().html(wxdisplay);
+                that.children(".result-interior").html(wxdisplay);
             })
             $(this).children().removeClass("collapse").addClass("collapse-show");  // shows the div once it's populated with weather data
             

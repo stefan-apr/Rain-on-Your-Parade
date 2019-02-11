@@ -6,9 +6,11 @@
       #map {
         height:350px;
         width:100%;
-        /* float:left;
-        overflow:clear; */
-        /* position: relative; */
+        
+        /* float:left; */
+        overflow:clear;
+        position: relative;
+
         margin: 0 auto;
         /* margin-top: -500px;
         margin-left:300px;  */
