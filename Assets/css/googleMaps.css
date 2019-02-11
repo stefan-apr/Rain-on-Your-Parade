@@ -5,21 +5,21 @@
        * element that contains the map. */
       #map {
         height:350px;
-        width:50%;
-        float:left;
-        overflow:clear;
-        position: relative;
+        width:auto;
+        /* float:left;
+        overflow:clear; */
+        /* position: relative; */
         margin: 0 auto;
-        margin-top: -500px;
-        margin-left:300px; 
+        /* margin-top: -500px;
+        margin-left:300px;  */
         align-content: space-around;
       }
       /* Optional: Makes the sample page fill the window. */
-      html, body {
+      /* html, body {
         height: 100%;
         margin: 0;
         padding: 0;
-      }
+      } */
       #description {
         font-family: Roboto;
         font-size: 15px;

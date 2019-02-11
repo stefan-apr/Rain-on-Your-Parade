@@ -3,17 +3,24 @@ div.jumbotron {
     background-size: cover;
     padding: 2em;
     color: white;
-    text-shadow: 2px 2px 4px black;
+    text-shadow: 2px 2px 10px black,
+        -2px -2px 10px black,
+        -2px 2px 10px black,
+        2px -2px 10px black;
     color: whitesmoke;
 }
 
-div.collapse {
+.collapse {
     display: none;
 }
 
 
-div.collapse-show {
+.collapse-show {
     display: block;
+}
+
+.result-shell {
+    cursor: pointer;
 }
 
 footer {
@@ -55,10 +62,12 @@ canvas { /* weather icons */
     width: 100%;
 }
 
-#results-frame{
+ #results-frame{
     margin: auto;
     margin-left:300px;
-    margin-top:-150px;
+    margin-top:-300px;
+} 
+  
 
 }
 
@@ -95,4 +104,9 @@ canvas { /* weather icons */
   
 h5{
     text-align:center;
+}
+
+div.result-interior {
+    font-size: 0.8em;
+    font-style: italic;
 }
