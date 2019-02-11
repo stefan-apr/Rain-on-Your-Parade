@@ -80,7 +80,49 @@ $(document).ready(function() {
       console.log(selectedCat);
       console.log(typeof selectedCat);
       if(selectedCat !== '-1' && selectedCat !== null) {
+
+        console.log('selectedCat is !== -1')
+    // creating a temp obj to hold values. Yin
+    var newObj = {
+        category: categoryPiece,
+        categoryName:selectedCatName,
+        startDate: selectedStartDate,
+        endDate: selectedEndDate,
+        radius: radius
+    };
+
+    // push values from the temp newobj to fb.  
+    
+    var database = firebase.database();
+    database.ref().push(newObj);
+      console.log(newObj);
+      console.log(newObj.startDate);
+      console.log(newObj.endDate);
+    
+    // // clearing the input boxes.
+    // $("#start-event").val("");
+    // $("#end-event").val("");
+    // $("#keyword").val("");
+
+
+      var latitude = coordinates.lat; // Taken from placesAPI.js
+      var longitude = coordinates.lng; // Taken from placesAPI.js
+      if(latitude === undefined || longitude === undefined || selectedCat === undefined || radius === undefined) {
+        console.log("Vital field not filled");
+        enableButtons(0);
+        return;
+      }
+      var categoryPiece = "";
+      var startDatePiece = "";
+      var endDatePiece = "";
+      var keywordPiece = "";
+      if(selectedKeyword !== -1 && selectedKeyword !== undefined) {
+        keywordPiece = "&q=" + selectedKeyword;
+      }
+      if(parseInt(selectedCat) !== -1) {
+
         console.log('selectedCat is !== -1');
+
         categoryPiece = "&categories=" + selectedCat;
       } else {
         console.log('selectedCat is === -1')
@@ -133,11 +175,16 @@ $(document).ready(function() {
         console.log(queryURL);
 
       getEvents(queryURL);
+
+    }
     } 
 
     // The user entered a start date that's later than the end. Display an error message. 
     else {
       console.log("Invalid date entry: Start date later than end date");
+    }
+  };
+}); 
       enableButtons(0);
     }
   }); 
@@ -221,6 +268,7 @@ $(document).ready(function() {
       $("#btn-up-" + j).css("display", "none");
       $("#btn-down-" + j).css("display", "none");
     }
+
     for(var i = (cur - 3); i < (cur + 4); i++) {
       $("#btn-up-" + i).css("display", "inline");
       $("#btn-down-" + i).css("display", "inline");
