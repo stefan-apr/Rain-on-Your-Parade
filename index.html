@@ -28,22 +28,18 @@
                         <div class="card-body">
                             <form id="form">
                                 <label for="keyword" class="form-label">Keyword</label><br>
-                                <div>
-                                    <input type="text" id="keyword" placeholder="">
-                                </div>
+                                <input type="text" id="keyword" placeholder="">
                                 <br><br>
                                 <label for="event-location" class="form-label">Location</label><br>
 
                                 <!-- autocomplete the address with placesAPI -->
 
-                                <form>
-                                    <div class="autoComplete">
-                                        <input id="locationInput" type="text" name="location" placeholder="City, State">
-                                    </div>
-                                    
-                                </form>
+                                <div class="autoComplete">
+                                    <input id="locationInput" type="text" name="location" placeholder="City, State">
+                                </div>
+
                                     <!--google maps places API-->
-                                <br><br>
+                                <br>
                                 <label for="radius" class="form-label">Search Radius</label><br>      
                                 <select id="event-location-radius">
                                     <option id="1-mi" value="1">1 Mile</option>
