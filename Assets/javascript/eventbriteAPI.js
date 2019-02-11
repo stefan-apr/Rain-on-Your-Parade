@@ -244,7 +244,7 @@ $(document).ready(function() {
 
 
   //  LIMITING ITEMS PRINTED TO DOM TO 5
-  var database = firebase.database().ref().limitToLast(8);
+  var database = firebase.database().ref().limitToLast(10);
 
   // CREATING A FIREBASE EVENT.
   
