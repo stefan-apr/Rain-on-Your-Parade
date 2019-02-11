@@ -1,6 +1,6 @@
 // WEATHER API
 
-$("#results-page").on("click", ".result-shell", function(event) {
+$(document).on("click", ".result-shell", function(event) {
     event.preventDefault();
     console.log("clicked on event");
     var that = $(this);
@@ -43,7 +43,7 @@ $("#results-page").on("click", ".result-shell", function(event) {
                     "mph<br>Cloud cover: " + cloud +
                     "<br>");
                 
-                that.children().hasClass("result-interior").append(wxdisplay);
+                that.chilren().hasClass("result-interior").append(wxdisplay);
             })
             that.children().removeClass("collapse").addClass("collapse-show");  // shows the div once it's populated with weather data
             
