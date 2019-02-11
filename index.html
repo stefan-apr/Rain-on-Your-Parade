@@ -72,7 +72,7 @@
                                 <!--Find a way to make the second date the same or later as the first date-->
                                  <br><br>
                             </form>
-                            <button class="btn btn-sm btn-dark" id="submit">Submit</button>
+                            <button class="btn btn-sm btn-dark updateMap newSearch" id="submit">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -102,8 +102,7 @@
                  </div>
          
                 <!------------------GOOGLE MAPS------------>
-                
-                <div id="map"></div>
+                <div  id="map"></div>
 
 
                 <div class="col-6" id="results-frame">
@@ -143,16 +142,16 @@
         <script src="Assets/javascript/weatherAPI.js"></script>
         <script src="Assets/javascript/googleMaps.js"></script>
         <script src="Assets/javascript/firebase.js"></script> 
+        <script src="Assets/javascript/mapsAPI.js"></script>
     
-
-        </script>
         <!--JQ -->
-    <!-- BOOTSRAPS -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- BOOTSRAPS -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <!-- GOOGLE MAPS -->
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTlO4pKr4aLLI2sA2Z8MwU7C5pRcu9ExY&libraries=places&callback=initAutocomplete"async defer>
-        </script>
+        <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTlO4pKr4aLLI2sA2Z8MwU7C5pRcu9ExY&libraries=places&callback=initAutocomplete"async defer></script> -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTlO4pKr4aLLI2sA2Z8MwU7C5pRcu9ExY&callback=initMap"></script>
         
   </body>
 </html>

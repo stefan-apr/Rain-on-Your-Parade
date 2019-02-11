@@ -8,7 +8,7 @@ var coordinates = {};
 $("#locationInput").keyup(function(){
     $(".predictionButtons").remove();
     var locationInput = $(this).val();
-    console.log($(this).val());
+    //console.log($(this).val());
     
     var autoLocationUrl = "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" 
                             + locationInput + "&types=(cities)&key=" + apiKey;

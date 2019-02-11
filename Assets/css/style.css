@@ -34,10 +34,7 @@ canvas { /* weather icons */
     margin-top: 8px;
 }
 
-<<<<<<< HEAD
-.predictionButtons {
-  
-}
+
 
 .predictionButtons:hover {
     cursor: pointer;
@@ -54,46 +51,8 @@ canvas { /* weather icons */
 
 #keyword {
     width: 100%;
-=======
-#results-frame{
-    margin:0 auto;
-    margin-left:300px;
-    margin-top:-150px;
 }
 
-#results-buttons-up {
-    height: 45px;
-    width: 100%;
-    float: left;
-}
-
-#results-buttons-down {
-    height: 45px;
-    width: 100%;
-    float: left;
-}
-
-#results-page {
-    float: left;
-    width: 100%;
-}
-
-#load {
-    position: absolute;
+.mapHidden {
     display: none;
-    height: 45px;
-    width: 5%;
-    left: 5%;
-    top: -0.1%;
-}
-
-#page-search {
-    margin-bottom: 1%;
-    display: none;
-}
-  
-h5{
-    text-align:center;
-
->>>>>>> 7a791f53906e71a5ed3ca7dc8f9109e89c6de7dc
 }
