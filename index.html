@@ -33,9 +33,8 @@
                         <div class="card-body">
                             <form id="form">
                                 <label for="keyword" class="form-label">Keyword</label><br>
-                                <div>
-                                    <input type="text" id="keyword" placeholder="">
-                                </div>
+                                <input type="text" class='form-control' id="keyword" placeholder="">
+
                                 <br><br>
                                 <label for="event-location" class="form-label">Location</label><br>
 
@@ -43,7 +42,7 @@
 
                                 <form>
                                     <div class="autoComplete">
-                                        <input id="locationInput" type="text" name="location" placeholder="City">
+                                        <input id="locationInput" class='form-control' type="text" name="location" placeholder="City">
                                     </div>
                                     
                                 </form>
@@ -60,15 +59,15 @@
                                 </select>    
                                 <br><br>
                                 <label for="event-type" class="form-label">Type of event</label><br>
-                                <select id="event-type">
+                                <select id="event-type" class='form-control'>
                                     <option id="any-type" value="-1" selected="selected">Any</option>
                                     <!-- Populate other options from Eventbrite API using jQuery -->
                                 </select>
                                 <br><br>
                                 <label for="start-event" class="form-label">Start date</label><br>
-                                <input type="date" id="start-event" name="date" min="" max=""><br>
+                                <input type="date" class='form-control' id="start-event" name="date" min="" max=""><br>
                                 <label for="end-event" class="form-label">End date</label><br>
-                                <input type="date" id="end-event" name="date" min="" max="">
+                                <input type="date" class='form-control' id="end-event" name="date" min="" max="">
                                 <!--Find a way to make the second date the same or later as the first date-->
                                  <br><br>
                             </form>
@@ -106,6 +105,7 @@
                 <div id="map"></div>
 
 
+                <div class="col-9" id="results-frame">
                 <div class="col-6" id="results-frame">
                     <div id="results-buttons-up"></div>
                     <img src="Assets/images/load.gif" id="load" alt="Loading..."><br>
