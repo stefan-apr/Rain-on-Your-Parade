@@ -1,6 +1,6 @@
 // WEATHER API
 
-$("#results-page").on("click", ".result-shell", function(event) {
+$(document).on("click", ".result-shell", function(event) {
     event.preventDefault();
     console.log("clicked on event");
     var that = $(this);

@@ -28,16 +28,22 @@
                         <div class="card-body">
                             <form id="form">
                                 <label for="keyword" class="form-label">Keyword</label><br>
-                                <input type="text" id="keyword" placeholder="">
+                                <div>
+                                    <input type="text" id="keyword" placeholder="">
+                                </div>
                                 <br><br>
                                 <label for="event-location" class="form-label">Location</label><br>
 
                                 <!-- autocomplete the address with placesAPI -->
-                                <div class="autoComplete">
-                                    <input id="locationInput" type="text" name="location" placeholder="City, State">
-                                </div>
+
+                                <form>
+                                    <div class="autoComplete">
+                                        <input id="locationInput" type="text" name="location" placeholder="City, State">
+                                    </div>
+                                    
+                                </form>
                                     <!--google maps places API-->
-                                <br>
+                                <br><br>
                                 <label for="radius" class="form-label">Search Radius</label><br>      
                                 <select id="event-location-radius">
                                     <option id="1-mi" value="1">1 Mile</option>
@@ -93,7 +99,7 @@
 
                 <div class="col-3" id="pop-searches">
                     <div class="card">
-                        <div class="card-header"><h5 class="card-title">Recently Searched Event Types</h5></div>
+                        <div class="card-header"><h5 class="card-title">Last Searched Category</h5></div>
                         <div class="card-body">
                             <table class="table" id='results-table'>
                                 <thead>
@@ -127,7 +133,3 @@
         
   </body>
 </html>
-        
-
-
-
