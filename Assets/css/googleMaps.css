@@ -5,7 +5,7 @@
        * element that contains the map. */
       #map {
         height:350px;
-        width:auto;
+        width:100%;
         /* float:left;
         overflow:clear; */
         /* position: relative; */
@@ -108,7 +108,7 @@
         }
       #map.active {
             height:350px;
-            width:50%;
+            width:100%;
             float:left;
             overflow:clear;
             position: relative;
