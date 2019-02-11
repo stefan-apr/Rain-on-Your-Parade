@@ -1,20 +1,21 @@
-// weather results div default is collapsed
+// WEATHER API
 
 $("#results-page").on("click", ".result-shell", function(event) {
     event.preventDefault();
-    console.log("clicked on a specific event");
+    console.log("click on event");
     
-    if ($(this).children(".result-interior").hasClass("collapse")) {   // the .next("div") is the div that actually contains weather data 
+    if ($(this).children(".result-interior").hasClass("collapse")) {   // the .children(".result-interior") is the div that actually contains weather data, starts out collapsed by default
         console.log("show weather");
+
+        $(this).children(".result-interior").empty(); //clears the div
+
         var lat = $(this).attr("data-latitude"); // pulled from eventbrite API
         var long = $(this).attr("data-longitude");// pulled from eventbrite API
         var eventDate = moment($(this).attr("data-start")).format("X"); // pulled from eventbrite API, convert to UNIX format
-        var queryURL = "https://api.darksky.net/forecast/e3bf810172b3fa7c6960cc8b6769743c/" + lat + "," + long + "," + eventDate;
-        var queryURL;
         var wxresults; 
         var wxdisplay = $("div");
-
         var proxy = "https://cors-anywhere.herokuapp.com/";
+        var queryURL = "https://api.darksky.net/forecast/e3bf810172b3fa7c6960cc8b6769743c/" + lat + "," + long + "," + eventDate;
     
         $.ajax({
             url: proxy + queryURL,
@@ -45,12 +46,13 @@ $("#results-page").on("click", ".result-shell", function(event) {
                 
                 $(this).children(".result-interior").append(wxdisplay);
             })
-            $(this).children(".result-interior").attr("class", "collapse-show");  // shows the div once it's populated with weather data
+            $(this).children(".result-interior").removeClass("collapse").addClass("collapse-show");  // shows the div once it's populated with weather data
             
         }
 
     else if ($(this).children(".result-interior").hasClass("collapse-show")) {  // collapse div if it's already showing
-        $(this).next(".result-interior").attr("class", "collapse");
+        $(this).children(".result-interior").removeClass("collapse-show").addClass("collapse");
+        $(this).children(".result-interior").empty(); //clears the div
         console.log("hide weather");
     }
     else {
