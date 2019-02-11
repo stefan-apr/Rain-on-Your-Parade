@@ -49,6 +49,7 @@ $(document).ready(function() {
   */
 
   $("#submit").click(function() {
+    $("#no-results").css("display", "none");
     disableButtons(0);
     initialQuery = true;
     $("#results-buttons-up").empty();
@@ -75,7 +76,9 @@ $(document).ready(function() {
       var radius = $("#event-location-radius").val();
       $("#initial-text").css("display", "none");
 
-      if(selectedCat === null) {
+      if(selectedCat === null || radius === null) {
+        console.log("Somehow, a dropdown value was null. That's not supposed to be possible.");
+        enableButtons(0);
         return;
       }
 
@@ -157,6 +160,12 @@ $(document).ready(function() {
       if(initialQuery) {
         initialQuery = false;
         currentPage = 1;
+        if(response.events.length === 0) {
+          $("#no-results").css("display", "block");
+          enableButtons(0);
+          $("#page-search").css("display", "none");
+          return; 
+        }
 
         // Make results buttons if this is the first search with these terms.
         for(var i = 1; i <= response.pagination.page_count; i++) {
@@ -186,7 +195,7 @@ $(document).ready(function() {
           "' data-longitude='" + response.events[i].venue.longitude + "' data-latitude='" + response.events[i].venue.latitude + 
           "' data-start='" + response.events[i].start.local + "' data-address='" + response.events[i].venue.address.localized_address_display + 
           "'>" + response.events[i].name.text + "</div>");
-        var newInside = $("<div id='" + i + "-inner' class='result-interior collapse'>" + "This is an inner result" + "</div>");
+        var newInside = $("<div id='" + i + "-inner' class='result-interior collapse'></div>");
         var linebreak = $("<br>");
         
         $("#results-page").append(newShell);
@@ -197,6 +206,7 @@ $(document).ready(function() {
     });
   }
 
+  // Function that handles hiding and displaying page buttons when a results page is chosen
   function shiftButtons(curButton, totalButtons) {
     var cur = parseInt(curButton);
     var tot = parseInt(totalButtons);
@@ -220,6 +230,8 @@ $(document).ready(function() {
     currentPage = cur;
   }
 
+  // Function that handles disabling all buttons on the page while loading new event data.
+  // That way, the user cannot spam the submit or pagination buttons and queue up lots of queries
   function disableButtons(totalButtons) {
     for(var i = 0; i <= totalButtons; i++) {
       $('#btn-up-' + i).attr('disabled','disabled');
@@ -230,6 +242,7 @@ $(document).ready(function() {
     $("#load").css("display", "block");
   }
 
+  // Function that handles re-enabling buttons once event data has been loaded or after any kind of error.
   function enableButtons(totalButtons) {
     for(var i = 0; i <= totalButtons; i++) {
       $('#btn-up-' + i).removeAttr('disabled');
@@ -254,7 +267,6 @@ $(document).ready(function() {
     // snapshot.ref().remove(); -------WANTING TO CLEAR THE FB DATA FOR A REFRESH START, BUT NOT WORKING
 
    var categoryPiece = snapshot.val().categoryName;
-   console.log('hi yall')
   //   var selectedStartDate = snapshot.val().startDate;
   //   var selectedEndDate = snapshot.val().endDate;
 

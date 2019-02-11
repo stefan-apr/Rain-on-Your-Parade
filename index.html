@@ -30,7 +30,7 @@
                                 <label for="keyword" class="form-label">Keyword</label><br>
                                 <input type="text" id="keyword" placeholder="">
                                 <br><br>
-                                <label for="event-location" class="form-label">Location</label><br>
+                                *<label for="event-location" class="form-label">Location</label><br>
 
                                 <!-- autocomplete the address with placesAPI -->
 
@@ -64,6 +64,7 @@
                                  <br><br>
                             </form>
                             <button class="btn btn-sm btn-dark" id="submit">Submit</button>
+                            <div id="req"><br>* Indicates required items</div>
                         </div>
                     </div>
                 </div>
@@ -76,6 +77,8 @@
                     </div>
 
                     <div id="map"></div>
+
+                    <div id="no-results">There are no events matching your search terms. Try casting a wider net!</div>
 
                     <div id="results-buttons-up"></div>
 
