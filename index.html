@@ -41,7 +41,7 @@
                                     <!--google maps places API-->
                                 <br>
                                 <label for="radius" class="form-label">Search Radius</label><br>      
-                                <select id="event-location-radius">
+                                <select id="event-location-radius" class="form-control">
                                     <option id="1-mi" value="1">1 Mile</option>
                                     <option id="5-mi" value="5" selected="selected">5 Miles</option>
                                     <option id="10-mi" value="10">10 Miles</option>
@@ -51,15 +51,15 @@
                                 </select>    
                                 <br><br>
                                 <label for="event-type" class="form-label">Type of event</label><br>
-                                <select id="event-type">
+                                <select id="event-type" class="form-control">
                                     <option id="any-type" value="-1" selected="selected">Any</option>
                                     <!-- Populate other options from Eventbrite API using jQuery -->
                                 </select>
                                 <br><br>
                                 <label for="start-event" class="form-label">Start date</label><br>
-                                <input type="date" id="start-event" name="date" min="" max=""><br>
+                                <input type="date" class='form-control' id="start-event" name="date" min="" max=""><br>
                                 <label for="end-event" class="form-label">End date</label><br>
-                                <input type="date" id="end-event" name="date" min="" max="">
+                                <input type="date" class='form-control'id="end-event" name="date" min="" max="">
                                 <!--Find a way to make the second date the same or later as the first date?-->
                                  <br><br>
                             </form>
