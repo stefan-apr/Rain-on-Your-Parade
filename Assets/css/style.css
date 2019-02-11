@@ -10,13 +10,17 @@ div.jumbotron {
     color: whitesmoke;
 }
 
-div.collapse {
+.collapse {
     display: none;
 }
 
 
-div.collapse-show {
+.collapse-show {
     display: block;
+}
+
+.result-shell {
+    cursor: pointer;
 }
 
 footer {
