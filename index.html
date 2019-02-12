@@ -30,16 +30,15 @@
                                 <label for="keyword" class="form-label">Keyword</label><br>
                                 <input type="text" id="keyword" placeholder="">
                                 <br><br>
-                                *<label for="event-location" class="form-label">Location</label><br>
+                                <label for="event-location" class="form-label">Location*</label>
 
                                 <!-- autocomplete the address with placesAPI -->
 
                                 <div class="autoComplete">
                                     <input id="locationInput" type="text" name="location" placeholder="City, State">
                                 </div>
-
-                                    <!--google maps places API-->
                                 <br>
+                                    <!--google maps places API-->
                                 <label for="radius" class="form-label">Search Radius</label><br>      
                                 <select id="event-location-radius" class="form-control">
                                     <option id="1-mi" value="1">1 Mile</option>
@@ -49,21 +48,21 @@
                                     <option id="50-mi" value="50">50 Miles</option>
                                     <option id="100-mi" value="100">100 Miles</option>
                                 </select>    
-                                <br><br>
+                                <br>
                                 <label for="event-type" class="form-label">Type of event</label><br>
                                 <select id="event-type" class="form-control">
                                     <option id="any-type" value="-1" selected="selected">Any</option>
                                     <!-- Populate other options from Eventbrite API using jQuery -->
                                 </select>
-                                <br><br>
+                                <br>
                                 <label for="start-event" class="form-label">Start date</label><br>
                                 <input type="date" class='form-control' id="start-event" name="date" min="" max=""><br>
                                 <label for="end-event" class="form-label">End date</label><br>
                                 <input type="date" class='form-control'id="end-event" name="date" min="" max="">
                                 <!--Find a way to make the second date the same or later as the first date?-->
-                                 <br><br>
+                                 <br>
                             </form>
-                            <button class="btn btn-sm btn-dark newSearch updateMap" id="submit">Submit</button>
+                            <button class="btn btn-dark newSearch updateMap" id="submit">Submit</button>
                             <div id="req"><br>* Indicates required items</div>
                         </div>
                     </div>
@@ -130,7 +129,7 @@
         <script src="Assets/javascript/weatherAPI.js"></script>
         <script src="Assets/javascript/skycons.js"></script> <!-- weather icons for weather API -->
         <script src="Assets/javascript/googleMaps.js"></script>
-        <script src="Assets/javascript/firebase.js"></script> 
+    
         
     
         <!--JQ -->

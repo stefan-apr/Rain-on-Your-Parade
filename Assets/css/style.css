@@ -36,9 +36,7 @@ footer {
 
 canvas { /* weather icons */
     display: block;
-    float: left;
-    margin-left: 8px;
-    margin-top: 8px;
+    margin: 0 auto;
 }
 
 .predictionButtons {
@@ -107,6 +105,8 @@ h5{
 div.result-interior {
     font-size: 0.8em;
     font-style: italic;
+    border-top: solid 1px black;
+    padding: 0.5em;
 }
 
 #no-results {
