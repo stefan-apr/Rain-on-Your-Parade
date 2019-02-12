@@ -5,7 +5,7 @@ $(document).on("click", ".result-shell", function(event) {
     var that = $(this); 
     
     // the .children() is the div that actually contains weather data, starts out collapsed and empty by default
-    if (($(this).children().hasClass("collapse")) && ($.trim($(this).children().html()).length === 0)) {
+    if (($(this).children(".result-interior").hasClass("collapse")) && ($.trim($(this).children(".result-interior").html()).length === 0)) {
 
         var lat = $(this).attr("data-latitude"); // pulled from eventbrite API
         var long = $(this).attr("data-longitude");// pulled from eventbrite API
@@ -70,7 +70,7 @@ $(document).on("click", ".result-shell", function(event) {
             
         }
     
-    else if (($(this).children(".result-interior").hasClass("collapse")) && ($.trim($(this).children().html()).length != 0)) { // weather data already loaded, just show it
+    else if (($(this).children(".result-interior").hasClass("collapse")) && ($.trim($(this).children(".result-interior").html()).length != 0)) { // weather data already loaded, just show it
         $(this).children(".result-interior").removeClass("collapse").addClass("collapse-show");
     }
 
