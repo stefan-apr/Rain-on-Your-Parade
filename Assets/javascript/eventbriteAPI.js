@@ -363,7 +363,7 @@ $(document).ready(function() {
 
 
   //  LIMITING ITEMS PRINTED TO DOM TO 5
-  var database = firebase.database().ref().limitToLast(10);
+  var database = firebase.database().ref().limitToLast(9);
 
   // CREATING A FIREBASE EVENT.
   
@@ -386,6 +386,6 @@ $(document).ready(function() {
     // $('<td>').text(selectedEndDate)
     );
 
-   $('#results-table > tbody').append(newRow);
+   $('#results-table > tbody').prepend(newRow);
    });
 });
