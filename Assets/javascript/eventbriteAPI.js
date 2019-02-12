@@ -209,7 +209,7 @@ $(document).ready(function() {
       }
     
       queryURL = "https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search/?location.longitude=" + longitude + "&location.latitude=" + 
-        latitude + "&location.within=" + radius + "mi" + categoryPiece + startDatePiece + endDatePiece + keywordPiece + "&sort_by=distance" + 
+        latitude + "&location.within=" + radius + "mi" + categoryPiece + startDatePiece + endDatePiece + keywordPiece + "&sort_by=date" + 
         "&expand=venue,ticket_availability,format" + "&token=" + auth;
 
         console.log(queryURL);
@@ -256,10 +256,10 @@ $(document).ready(function() {
 
         // Make results buttons if this is the first search with these terms.
         for(var i = 1; i <= response.pagination.page_count; i++) {
-          var newButtonUp = $("<button value='" + i + "' class='btn btn-dark' id='btn-up-" + i +"'>" + i + "</button>");
-          newButtonUp.attr('class', 'updateMap');
-          var newButtonDown = $("<button value='" + i + "' class='btn btn-dark' id='btn-down-" + i + "'>" + i + "</button>");  
-          newButtonDown.attr('class', 'updateMap');
+          var newButtonUp = $("<button value='" + i + "'id='btn-up-" + i +"'>" + i + "</button>");
+          newButtonUp.attr('class', 'updateMap btn btn-dark');
+          var newButtonDown = $("<button value='" + i + "'id='btn-down-" + i + "'>" + i + "</button>");  
+          newButtonDown.attr('class', 'updateMap btn btn-dark');
           newButtonDown.css("margin-right", "2px");
           newButtonUp.css("margin-right", "2px");       
           $("#results-buttons-up").append(newButtonUp);
@@ -288,15 +288,29 @@ $(document).ready(function() {
         $("#page-search").css("display", "block");
       }
       for(var i = 0; i < response.events.length; i++) {
+        var thisAddress = response.events[i].venue.address.localized_address_display;
+        var thisStartDate = response.events[i].start.local.split("T");
         
         var newShell = $("<div id='" + i + "-outer' class='result-shell' data-name='" + response.events[i].name.text + 
           "' data-longitude='" + response.events[i].venue.longitude + "' data-latitude='" + response.events[i].venue.latitude + 
-          "' data-start='" + response.events[i].start.local + "' data-address='" + response.events[i].venue.address.localized_address_display + 
-          "'>" + response.events[i].name.text + "<br>" + response.events[i].start.local + "</div>");
+          "' data-start='" + response.events[i].start.local + "' data-address='" + thisAddress + 
+          "'></div>");
 
-        var thisAddress = response.events[i].venue.address.localized_address_display;
         //console.log("this latlng=");
         //console.log(thisAddress);
+        var nameDiv = $("<div class='result-name'></div>");
+        nameDiv.text(response.events[i].name.text);
+
+        var dateDiv = $("<div class='result-date'></div>")
+        dateDiv.text("Starts on " + thisStartDate[0] + ", at " + thisStartDate[1]);
+
+        var addressDiv = $("<div class='result-address'></div>");
+        addressDiv.text(thisAddress);
+
+        newShell.append(nameDiv);
+        newShell.append(addressDiv);
+        newShell.append(dateDiv);
+
         var thisID = newShell.attr('id');
         var thisEventName = newShell.attr('data-name');
         geocodeAddress(thisAddress, geocoder, map, thisID, thisEventName);

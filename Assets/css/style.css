@@ -89,7 +89,7 @@ canvas { /* weather icons */
     height: 40px;
     width: 5%;
     right: 5%;
-    top: -0.1%;
+    top: 6.22%;
 }
 
 #page-search {
@@ -122,4 +122,16 @@ div.result-interior {
 .mapHidden {
     display: none;
     width: 100%;
+}
+
+.result-name {
+
+}
+
+.result-date {
+    font-weight: 170;
+}
+
+.result-address {
+    font-style: italic;
 }
