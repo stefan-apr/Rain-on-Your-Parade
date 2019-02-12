@@ -34,7 +34,7 @@ $(document).on("click", ".result-shell", function(event) {
                 var wind = wxresults.windSpeed;
                 var cloud = wxresults.cloudCover;
                 
-                wxdisplay.append("<canvas id='" + icon + "' height='64' width='64'></canvas> " + summary +
+                wxdisplay.append("<canvas class='" + icon + "' height='64' width='64'></canvas> " + summary +
                     "<br>High temperature: " + high +
                     "\xB0F<br>Low temperature: " + low +
                     "\xB0F<br>Probability of precipitation: " + precipProb +
@@ -57,8 +57,13 @@ $(document).on("click", ".result-shell", function(event) {
                     "fog"
                 ],
                 i;
-                for(i = list.length; i--; )
-                    icons.set(list[i], list[i]);
+                for(i = list.length; i--; ) {
+                    var weatherType = list[i],
+                        elements = document.getElementsByClassName( weatherType );
+                    for (e = elements.length; e--;){
+                        icons.set( elements[e], weatherType );
+                    }
+                }
                 icons.play();
 
             })
