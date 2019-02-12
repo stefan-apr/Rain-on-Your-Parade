@@ -4,8 +4,8 @@ $(document).on("click", ".result-shell", function(event) {
     event.preventDefault();
     var that = $(this); 
     
-    if ($(this).children().hasClass("collapse")) {   // the .children() is the div that actually contains weather data, starts out collapsed by default
-        console.log("show weather");
+    if (($(this).children().hasClass("collapse")) && ($.trim($(this).children().html()).length === 0)) {   // the .children() is the div that actually contains weather data, starts out collapsed by default
+        console.log("call and show weather");
 
         var lat = $(this).attr("data-latitude"); // pulled from eventbrite API
         var long = $(this).attr("data-longitude");// pulled from eventbrite API
@@ -65,10 +65,14 @@ $(document).on("click", ".result-shell", function(event) {
             $(this).children().removeClass("collapse").addClass("collapse-show");  // shows the div once it's populated with weather data
             
         }
+    
+    else if (($(this).children().hasClass("collapse")) && ($.trim($(this).children().html()).length != 0)) {
+        console.log("weather already loaded, just show it");
+        $(this).children().removeClass("collapse").addClass("collapse-show");
+    }
 
     else if ($(this).children().hasClass("collapse-show")) {  // collapse div if it's already showing
         $(this).children().removeClass("collapse-show").addClass("collapse");
-        $(this).children().empty(); //clears the div
         console.log("hide weather");
     }
     else {
