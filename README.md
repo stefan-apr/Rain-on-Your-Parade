@@ -21,3 +21,6 @@ The goal of this app is to provide users with weather information for events the
 * For multi day events, show weather for all those days
 * If dates are used in the search, force user to choose an end date that is the same as or after the start date
 * Google Places autocomplete in the location search box show as dropdown rather than as a div
+
+© Stefan Apreutesei, Yin Lee, Ethan Mo, Catherine Pham
+February 11, 2019
