@@ -292,7 +292,7 @@ $(document).ready(function() {
         var newShell = $("<div id='" + i + "-outer' class='result-shell' data-name='" + response.events[i].name.text + 
           "' data-longitude='" + response.events[i].venue.longitude + "' data-latitude='" + response.events[i].venue.latitude + 
           "' data-start='" + response.events[i].start.local + "' data-address='" + response.events[i].venue.address.localized_address_display + 
-          "'>" + response.events[i].name.text + "</div>");
+          "'>" + response.events[i].name.text + "<br>" + response.events[i].start.local + "</div>");
 
         var thisAddress = response.events[i].venue.address.localized_address_display;
         //console.log("this latlng=");
